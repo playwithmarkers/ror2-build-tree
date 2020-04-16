@@ -519,23 +519,35 @@ var UIController = (function() {
                     <img src="dist/img/nobg-img/${dataItems[itemIndex].itemName}.png" alt="${dataItems[itemIndex].itemName}" class="item-list-img ${dataItems[itemIndex].rarity}">
                     <div class="item-description">
                         <h3>${dataItems[itemIndex].displayName}</h3>
-                        <div class="stack-number">x${dataItems[itemIndex].stackNumber}</div>
                         <div class="item-effect">
                             ${dataItems[itemIndex].effect}: 
                             <span class="item-total">${itemTotal}</span>
                         </div>
                     </div>
+                    <div class="stack-number">x${dataItems[itemIndex].stackNumber}</div>
                 </div>`);
 
                 if (dataItems[itemIndex].secondEffect) {
                     
                     document.querySelector(`.${itemName} .item-description`).insertAdjacentHTML('beforeend', `<div class="second-item-effect">${dataItems[itemIndex].secondEffect}: <span class="second-item-total">${secondItemTotal}</span></div></div>`);
+
+                    document.querySelector(`.${itemName} .stack-number`).classList.add('stack-number-mod');
+
+                    document.querySelector(`.${itemName} .stack-number`).classList.remove('stack-number');
                 }
             
             } else if (dataItems[itemIndex].stackNumber > 1) {
                 
-                document.querySelector(`.${itemName} .item-description div.stack-number`).innerHTML = `x${dataItems[itemIndex].stackNumber}`;
+                let normalStackSelect = document.querySelector(`.${itemName} .stack-number`);
+                let modStackSelect = document.querySelector(`.${itemName} .stack-number-mod`);
                 
+                if (normalStackSelect) {
+                    normalStackSelect.innerHTML = `x${dataItems[itemIndex].stackNumber}`;
+                } else if (modStackSelect) {
+                    modStackSelect.innerHTML = `x${dataItems[itemIndex].stackNumber}`;
+                }
+                
+
                 document.querySelector(`.${itemName} .item-description div span.item-total`).innerHTML = `${itemTotal}`;
 
                 if (dataItems[itemIndex].secondEffect) {

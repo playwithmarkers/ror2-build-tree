@@ -133,21 +133,21 @@ h2, .item-list {
 
 .item-list-item {
   display: block;
-  height: auto;
+  height: 70px;
   width: 100%;
-  margin-bottom: 15px;
-}
-
-h3 {
-  position: relative;
-  left: 5px;
+  margin-bottom: 3px;
 }
 
 .item-list-img {
   float: left;
 }
 
-.item-effect {
+/* h3 {
+  position: relative;
+  left: 5px;
+} */
+
+/* .item-effect {
   position: relative;
   top: -20px;
   left: 5px;
@@ -157,13 +157,20 @@ h3 {
   position: relative;
   top: -20px;
   left: 5px;
-}
+} */
 
 
 .stack-number {
   position: relative;
   left: -25px;
-  top: 27px;
+  top: 10px;
+  font-weight: 800;
+}
+
+.stack-number-mod {
+  position: relative;
+  left: -25px;
+  top: -8px;
   font-weight: 800;
 }
 
