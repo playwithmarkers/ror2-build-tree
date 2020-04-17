@@ -535,26 +535,41 @@ var UIController = (function() {
 
                     document.querySelector(`.${itemName} .stack-number`).classList.remove('stack-number');
                 }
-            
+
             } else if (dataItems[itemIndex].stackNumber > 1) {
                 
+                // modify item stack number
                 let normalStackSelect = document.querySelector(`.${itemName} .stack-number`);
                 let modStackSelect = document.querySelector(`.${itemName} .stack-number-mod`);
+                let stackCounter = dataItems[itemIndex].stackNumber;
                 
                 if (normalStackSelect) {
                     normalStackSelect.innerHTML = `x${dataItems[itemIndex].stackNumber}`;
+                    // change position of # on digit count (could make into a callable function)
+                    if (stackCounter > 9 && stackCounter < 100) {
+                        normalStackSelect.style.left = '-35px';
+                    } else if (stackCounter > 99) {
+                        normalStackSelect.style.left = '-45px';
+                    }
                 } else if (modStackSelect) {
                     modStackSelect.innerHTML = `x${dataItems[itemIndex].stackNumber}`;
+                    // change position of # on digit count
+                    if (stackCounter > 9 && stackCounter < 100) {
+                        modStackSelect.style.left = '-35px';
+                    } else if (stackCounter > 99) {
+                        modStackSelect.style.left = '-45px';
+                    }
                 }
-                
 
+                
+                // modify effect total
                 document.querySelector(`.${itemName} .item-description div span.item-total`).innerHTML = `${itemTotal}`;
 
+                // modify secondary effect total
                 if (dataItems[itemIndex].secondEffect) {
-                    
                     document.querySelector(`.${itemName} .item-description div span.second-item-total`).innerHTML = `${secondItemTotal}`;
                 }
-
+                
             }
                    
         },
