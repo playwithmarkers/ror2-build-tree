@@ -14,79 +14,58 @@ var itemCalculation = (function () {
 
     var data = {
         items: [
+
+/* -------------- COMMON ITEMS ------------- */
+
             {
-                itemName: 'soldiers-syringe',
-                displayName: 'Soldier\'s Syringe', 
+                itemName: 'armor-piercing-rounds',
+                displayName: 'Armor-Piercing Rounds',
                 rarity: 'common',
-                effect: 'attack-speed', 
+                effect: 'damage',
+                // damage from effect is dealt to bosses only
                 stackType: 'linear',
-                percentage: true, 
-                value: 0.15, 
-                stackValue: 0.15,
-                stackNumber: 0,
-                total: 0 
-            },
-            {
-                itemName: 'tougher-times',
-                displayName: 'Tougher Times', 
-                rarity: 'common',
-                effect: 'block-chance', 
-                stackType: 'hyperbolic',
                 percentage: true,
-                //actual value is around 0.13 
-                value: 0.15, 
-                stackValue: 0.15,
+                value: 0.20,
+                stackValue: 0.20,
                 stackNumber: 0,
-                total: 0,
+                total: 0
             },
             {
-                itemName: 'monster-tooth',
-                displayName: 'Monster Tooth', 
+                itemName: 'backup-magazine',
+                displayName: 'Backup Magazine',
                 rarity: 'common',
-                //drops a healing orb on kill
-                effect: 'heal', 
-                stackType: 'linear', 
-                value: 4, 
+                effect: 'secondary-charge',
+                // add additional charge to secondary skill
+                stackType: 'linear',
+                value: 1,
+                stackValue: 1,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'bundle-of-fireworks',
+                displayName: 'Bundle of Fireworks',
+                rarity: 'common',
+                effect: 'fireworks',
+                // launch fireworks on chest open.  300% base damage
+                stackType: 'linear',
+                value: 8,
                 stackValue: 4,
                 stackNumber: 0,
-                total: 0,
-            },
-            {
-                itemName: 'lens-makers-glasses',
-                displayName: 'Lens-Maker\'s Glasses', 
-                rarity: 'common',
-                effect: 'critical-chance', 
-                stackType: 'linear',
-                percentage: true, 
-                value: 0.10, 
-                stackValue: 0.10,
-                stackNumber: 0,
-                total: 0, 
-            },
-            {
-                itemName: 'pauls-goat-hoof',
-                displayName: 'Paul\'s Goat Hoof',
-                rarity: 'common',
-                effect: 'movement-speed',
-                stackType: 'linear',
-                percentage: true,
-                value: 0.14,
-                stackValue: 0.14,
-                stackNumber: 0,
-                total: 0,
+                total: 0
             },
             {
                 itemName: 'bustling-fungus',
                 displayName: 'Bustling Fungus',
                 rarity: 'common',
-                effect: 'heal',
+                effect: 'healing',
                 stackType: 'linear',
                 percentage: true,
                 value: 0.045,
                 stackValue: 0.0225,
                 stackNumber: 0,
                 total: 0,
-                //aoe is a radius in meters
+                // aoe is a radius in meters
                 secondEffect: 'aoe',
                 secondStackType: 'linear',
                 secondValue: 3,
@@ -95,10 +74,23 @@ var itemCalculation = (function () {
                 secondTotal: 0
             },
             {
+                itemName: 'cautious-slug',
+                displayName: 'Cautious Slug',
+                rarity: 'common',
+                // heal when out of combat
+                effect: 'healing',
+                stackType: 'linear',
+                percentage: true,
+                value: 2.50,
+                stackValue: 1.50,
+                stackNumber: 0,
+                total: 0 
+            },
+            {
                 itemName: 'crowbar',
                 displayName: 'Crowbar',
                 rarity: 'common',
-                //damage only to enemies above 90% health
+                // damage only to enemies above 90% health
                 effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
@@ -108,11 +100,23 @@ var itemCalculation = (function () {
                 total: 0
             },
             {
-                itemName: 'tri-tip-dagger',
-                displayName: 'Tri-Tip Dagger',
+                itemName: 'energy-drink',
+                displayName: 'Energy Drink',
                 rarity: 'common',
-                //bleed effect. 240% base damage
-                effect: 'bleed-chance',
+                effect: 'sprint-speed',
+                stackType: 'linear',
+                percentage: true,
+                value: 0.30,
+                stackValue: 0.20,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'focus-crystal',
+                displayName: 'Focus Crystal',
+                rarity: 'common',
+                // increase damage to enemies within 13m 
+                effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
                 value: 0.15,
@@ -121,52 +125,15 @@ var itemCalculation = (function () {
                 total: 0
             },
             {
-                itemName: 'warbanner',
-                displayName: 'Warbanner',
+                itemName: 'fresh-meat',
+                displayName: 'Fresh Meat',
                 rarity: 'common',
-                //effects increased 30%
-                effect: 'damage',
-                effect2: 'movement-speed',
-                //aoe increased radius per stack in meters
+                // increase by 2hp/s for base of 3s (+3s per stack) after kill
+                effect: 'healing',
                 stackType: 'linear',
-                value: 16,
-                stackValue: 8,
-                stackNumber: 0,
-                total: 0  
-            },
-            {
-                itemName: 'cautious-slug',
-                displayName: 'Cautious Slug',
-                rarity: 'common',
-                //heal when out of combat
-                effect: 'heal',
-                stackType: 'linear',
-                percentage: true,
-                value: 2.50,
-                stackValue: 1.50,
-                stackNumber: 0,
-                total: 0 
-            },
-            {
-                itemName: 'personal-shield-generator',
-                displayName: 'Personal Shield Generator',
-                rarity: 'common',
-                effect: 'shield',
-                stackType: 'linear',
-                value: 25,
-                stackValue: 25,
-                stackNumber: 0,
-                total: 0
-            },
-            {
-                itemName: 'medkit',
-                displayName: 'Medkit',
-                rarity: 'common',
-                //effect applies 1.1s after injury
-                effect: 'heal',
-                stackType: 'linear',
-                value: 10,
-                stackValue: 10,
+                // value and stackValue measured in seconds
+                value: 3,
+                stackValue: 3,
                 stackNumber: 0,
                 total: 0
             },
@@ -189,53 +156,98 @@ var itemCalculation = (function () {
                 secondTotal: 0
             },
             {
-                itemName: 'stun-grenade',
-                displayName: 'Stun Grenade',
+                itemName: 'lens-makers-glasses',
+                displayName: 'Lens-Maker\'s Glasses', 
                 rarity: 'common',
-                effect: 'stun-chance',
-                // chance to stun on hit for 2s
+                effect: 'critical-chance', 
                 stackType: 'linear',
-                percentage: true,
-                value: 0.05,
-                stackValue: 0.05,
+                percentage: true, 
+                value: 0.10, 
+                stackValue: 0.10,
+                stackNumber: 0,
+                total: 0, 
+            },
+            {
+                itemName: 'medkit',
+                displayName: 'Medkit',
+                rarity: 'common',
+                // effect applies 1.1s after injury
+                effect: 'healing',
+                stackType: 'linear',
+                value: 10,
+                stackValue: 10,
                 stackNumber: 0,
                 total: 0
             },
             {
-                itemName: 'bundle-of-fireworks',
-                displayName: 'Bundle of Fireworks',
+                itemName: 'monster-tooth',
+                displayName: 'Monster Tooth', 
                 rarity: 'common',
-                effect: 'fireworks',
-                // launch fireworks on chest open.  300% base damage
-                stackType: 'linear',
-                value: 8,
+                // drops a healing orb on kill
+                effect: 'healing', 
+                stackType: 'linear', 
+                value: 4, 
                 stackValue: 4,
                 stackNumber: 0,
-                total: 0
+                total: 0,
             },
             {
-                itemName: 'energy-drink',
-                displayName: 'Energy Drink',
+                itemName: 'pauls-goat-hoof',
+                displayName: 'Paul\'s Goat Hoof',
                 rarity: 'common',
-                effect: 'sprint-speed',
+                effect: 'movement-speed',
                 stackType: 'linear',
                 percentage: true,
-                value: 0.30,
-                stackValue: 0.20,
+                value: 0.14,
+                stackValue: 0.14,
+                stackNumber: 0,
+                total: 0,
+            },
+            {
+                itemName: 'personal-shield-generator',
+                displayName: 'Personal Shield Generator',
+                rarity: 'common',
+                effect: 'shield',
+                stackType: 'linear',
+                value: 25,
+                stackValue: 25,
                 stackNumber: 0,
                 total: 0
             },
             {
-                itemName: 'backup-magazine',
-                displayName: 'Backup Magazine',
+                itemName: 'repulsion-armor-plate',
+                displayName: 'Repulsion Armor Plate',
                 rarity: 'common',
-                effect: 'secondary-charge',
-                // add additional charge to secondary skill
+                // cannot be reduced below 1
+                effect: 'damage-reduction',
                 stackType: 'linear',
+                value: 5,
+                stackValue: 5,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'rusted-key',
+                displayName: 'Rusted Key',
+                rarity: 'common',
+                effect: 'drop-chance',
+                stackType: 'special',
                 value: 1,
                 stackValue: 1,
                 stackNumber: 0,
                 total: 0
+            },
+            {
+                itemName: 'soldiers-syringe',
+                displayName: 'Soldier\'s Syringe', 
+                rarity: 'common',
+                effect: 'attack-speed', 
+                stackType: 'linear',
+                percentage: true, 
+                value: 0.15, 
+                stackValue: 0.15,
+                stackNumber: 0,
+                total: 0 
             },
             {
                 itemName: 'sticky-bomb',
@@ -258,29 +270,72 @@ var itemCalculation = (function () {
                 secondTotal: 0
             },
             {
-                itemName: 'rusted-key',
-                displayName: 'Rusted Key',
+                itemName: 'stun-grenade',
+                displayName: 'Stun Grenade',
                 rarity: 'common',
-                effect: 'drop-chance',
-                stackType: 'special',
-                value: 1,
-                stackValue: 1,
+                effect: 'stun-chance',
+                // chance to stun on hit for 2s
+                stackType: 'linear',
+                percentage: true,
+                value: 0.05,
+                stackValue: 0.05,
                 stackNumber: 0,
                 total: 0
             },
             {
-                itemName: 'armor-piercing-rounds',
-                displayName: 'Armor-Piercing Rounds',
+                itemName: 'topaz-brooch',
+                displayName: 'Topaz Brooch',
                 rarity: 'common',
-                effect: 'damage',
-                // damage from effect is dealt to bosses only
+                effect: 'barrier',
+                // activates on kill.  decays slowly over time
                 stackType: 'linear',
-                percentage: true,
-                value: 0.20,
-                stackValue: 0.20,
+                value: 15,
+                stackValue: 15,
                 stackNumber: 0,
                 total: 0
             },
+            {
+                itemName: 'tougher-times',
+                displayName: 'Tougher Times', 
+                rarity: 'common',
+                effect: 'block-chance', 
+                stackType: 'hyperbolic',
+                percentage: true,
+                // actual value is around 0.13 
+                value: 0.15, 
+                stackValue: 0.15,
+                stackNumber: 0,
+                total: 0,
+            },
+            {
+                itemName: 'tri-tip-dagger',
+                displayName: 'Tri-Tip Dagger',
+                rarity: 'common',
+                // bleed effect. 240% base damage
+                effect: 'bleed-chance',
+                stackType: 'linear',
+                percentage: true,
+                value: 0.15,
+                stackValue: 0.15,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'warbanner',
+                displayName: 'Warbanner',
+                rarity: 'common',
+                // damage and movement-speed increased 30% in aoe
+                effect: 'aoe',
+                // aoe increased radius per stack in meters
+                stackType: 'linear',
+                value: 16,
+                stackValue: 8,
+                stackNumber: 0,
+                total: 0  
+            },
+            
+/* -------------- UNCOMMON ITEMS ------------- */
+
             {
                 itemName: 'atg-missile-mk-1',
                 displayName: 'AtG Missile Mk. 1',
@@ -295,22 +350,98 @@ var itemCalculation = (function () {
                 total: 0
             },
             {
-                itemName: 'will-o-the-wisp',
-                displayName: 'Will-o\'-the-wisp',
+                itemName: 'bandolier',
+                displayName: 'Bandolier',
                 rarity: 'uncommon',
+                // 18% chance on kill for drop that resets all skill cooldowns
+                effect: 'drop-chance',
+                stackType: 'special',
+                percentage: true,
+                value: 0.18,
+                stackValue: 0.10,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'berzerkers-pauldron',
+                displayName: 'Berzerker\'s Pauldron',
+                rarity: 'uncommon',
+                // activates on killing 3 enemies in 1s.  frenzy increases movement-speed 50% and attack-speed 100%. 6s duration
+                effect: 'frenzy-duration',
+                stackType: 'linear',
+                value: 6,
+                stackValue: 4,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'chronobauble',
+                displayName: 'Chronobauble',
+                rarity: 'uncommon',
+                // slow for 60% on hit.  values in seconds
+                effect: 'slow',
+                stackType: 'linear',
+                value: 2,
+                stackValue: 2,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'death-mark',
+                displayName: 'Death Mark',
+                rarity: 'uncommon',
+                // increase damage by 50% from all sources for 7s to enemies with 4+ debuffs
                 effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
-                value: 3.50,
-                stackValue: 2.80,
+                value: 0.50,
+                stackValue: 0.50,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'fuel-cell',
+                displayName: 'Fuel Cell',
+                rarity: 'uncommon',
+                effect: 'equipment-charge',
+                stackType: 'linear',
+                value: 1,
+                stackValue: 1,
                 stackNumber: 0,
                 total: 0,
-                secondEffect: 'aoe',
-                secondStackType: 'linear',
-                secondValue: 12,
-                secondStackValue: 2.4,
+                // reduce equipment cooldown by secondTotal
+                secondEffect: 'equipment-cooldown',
+                secondStackType: 'exponential',
+                secondPercentage: true,
+                secondValue: 0.15,
+                secondStackValue: 0.15,
                 secondStackNumber: 0,
                 secondTotal: 0
+            },
+            {
+                itemName: 'ghors-tome',
+                displayName: 'Ghor\'s Tome',
+                rarity: 'uncommon',
+                // chance to drop treasure worth $25 on kill.  scales.
+                effect: 'drop-chance',
+                stackType: 'linear',
+                percentage: true,
+                value: 0.04,
+                stackValue: 0.04,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'harvesters-scythe',
+                displayName: 'Harvester\'s Scythe',
+                rarity: 'uncommon',
+                // gain 5% crit chance on pickup. crit strikes heal
+                effect: 'healing',
+                stackType: 'linear',
+                value: 8,
+                stackValue: 4,
+                stackNumber: 0,
+                total: 0
             },
             {
                 itemName: 'hopoo-feather',
@@ -322,6 +453,191 @@ var itemCalculation = (function () {
                 stackValue: 1,
                 stackNumber: 0,
                 total: 0
+            },
+            {
+                itemName: 'infusion',
+                displayName: 'Infusion',
+                rarity: 'uncommon',
+                // increase health permanently by 1.  capped by secondEffect
+                effect: 'health-increase',
+                stackType: 'linear',
+                value: 1,
+                stackValue: 1,
+                stackNumber: 0,
+                total: 0,
+                // total health increase available
+                secondEffect: 'health-addition',
+                secondStackType: 'linear',
+                secondValue: 100,
+                secondStackValue: 100,
+                secondStackNumber: 0,
+                secondTotal: 0
+            },
+            {
+                itemName: 'kjaros-band',
+                displayName: 'Kjaro\'s Band',
+                rarity: 'uncommon',
+                // 8% chance on hit to unleash a flame tornado
+                effect: 'damage',
+                stackType: 'linear',
+                percentage: true,
+                value: 5.00,
+                stackValue: 2.50,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'leeching-seed',
+                displayName: 'Leeching Seed',
+                rarity: 'uncommon',
+                // dealing damage heals you
+                effect: 'healing',
+                stackType: 'linear',
+                value: 1,
+                stackValue: 1,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'lepton-daisy',
+                displayName: 'Lepton Daisy',
+                rarity: 'uncommon',
+                // healing nova during teleporter event healing all for 50% of max health.  occurs ${total} times
+                effect: 'healing-nova',
+                stackType: 'linear',
+                value: 1,
+                stackValue: 1,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'old-guillotine',
+                displayName: 'Old Guillotine',
+                rarity: 'uncommon',
+                // instant kill elites below 20% health (actually starts at 16.7%)
+                effect: 'execution-threshold',
+                stackType: 'hyperbolic',
+                percentage: true,
+                value: 0.20,
+                stackValue: 0.20,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'old-war-stealthkit',
+                displayName: 'Old War Stealthkit',
+                rarity: 'uncommon',
+                // chance on damage taken to gain 40% movement-speed and invisibilty for ${total} in seconds
+                effect: 'duration',
+                stackType: 'linear',
+                value: 3,
+                stackValue: 1.5,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'predatory-instincts',
+                displayName: 'Predatory Instincts',
+                rarity: 'uncommon',
+                // +5% crit chance on pickup.  crit strikes increase attack-speed by 12%
+                effect: 'damage',
+                stackType: 'linear',
+                percentage: true,
+                value: 5.00,
+                stackValue: 2.50,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'kjaros-band',
+                displayName: 'Kjaro\'s Band',
+                rarity: 'uncommon',
+                // 8% chance on hit to unleash a flame tornado
+                effect: 'damage',
+                stackType: 'linear',
+                percentage: true,
+                value: 5.00,
+                stackValue: 2.50,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'kjaros-band',
+                displayName: 'Kjaro\'s Band',
+                rarity: 'uncommon',
+                // 8% chance on hit to unleash a flame tornado
+                effect: 'damage',
+                stackType: 'linear',
+                percentage: true,
+                value: 5.00,
+                stackValue: 2.50,
+                stackNumber: 0,
+                total: 0,
+            },
+            {
+                itemName: 'kjaros-band',
+                displayName: 'Kjaro\'s Band',
+                rarity: 'uncommon',
+                // 8% chance on hit to unleash a flame tornado
+                effect: 'damage',
+                stackType: 'linear',
+                percentage: true,
+                value: 5.00,
+                stackValue: 2.50,
+                stackNumber: 0,
+                total: 0,
+            },
+            {
+                itemName: 'kjaros-band',
+                displayName: 'Kjaro\'s Band',
+                rarity: 'uncommon',
+                // 8% chance on hit to unleash a flame tornado
+                effect: 'damage',
+                stackType: 'linear',
+                percentage: true,
+                value: 5.00,
+                stackValue: 2.50,
+                stackNumber: 0,
+                total: 0,
+            },
+            {
+                itemName: 'kjaros-band',
+                displayName: 'Kjaro\'s Band',
+                rarity: 'uncommon',
+                // 8% chance on hit to unleash a flame tornado
+                effect: 'damage',
+                stackType: 'linear',
+                percentage: true,
+                value: 5.00,
+                stackValue: 2.50,
+                stackNumber: 0,
+                total: 0,
+            },
+            {
+                itemName: 'kjaros-band',
+                displayName: 'Kjaro\'s Band',
+                rarity: 'uncommon',
+                // 8% chance on hit to unleash a flame tornado
+                effect: 'damage',
+                stackType: 'linear',
+                percentage: true,
+                value: 5.00,
+                stackValue: 2.50,
+                stackNumber: 0,
+                total: 0,
+            },
+            {
+                itemName: 'kjaros-band',
+                displayName: 'Kjaro\'s Band',
+                rarity: 'uncommon',
+                // 8% chance on hit to unleash a flame tornado
+                effect: 'damage',
+                stackType: 'linear',
+                percentage: true,
+                value: 5.00,
+                stackValue: 2.50,
+                stackNumber: 0,
+                total: 0,
             },
             {
                 itemName: 'ukulele',
@@ -341,7 +657,24 @@ var itemCalculation = (function () {
                 secondStackNumber: 0,
                 secondTotal: 0
             },
-
+            {
+                itemName: 'will-o-the-wisp',
+                displayName: 'Will-o\'-the-wisp',
+                rarity: 'uncommon',
+                effect: 'damage',
+                stackType: 'linear',
+                percentage: true,
+                value: 3.50,
+                stackValue: 2.80,
+                stackNumber: 0,
+                total: 0,
+                secondEffect: 'aoe',
+                secondStackType: 'linear',
+                secondValue: 12,
+                secondStackValue: 2.4,
+                secondStackNumber: 0,
+                secondTotal: 0
+            },
 
         ],
         calculation: [
@@ -531,34 +864,21 @@ var UIController = (function() {
                     
                     document.querySelector(`.${itemName} .item-description`).insertAdjacentHTML('beforeend', `<div class="second-item-effect">${dataItems[itemIndex].secondEffect}: <span class="second-item-total">${secondItemTotal}</span></div></div>`);
 
-                    document.querySelector(`.${itemName} .stack-number`).classList.add('stack-number-mod');
-
-                    document.querySelector(`.${itemName} .stack-number`).classList.remove('stack-number');
+                    document.querySelector(`.${itemName} .stack-number`).style.top = '-8px';
                 }
 
             } else if (dataItems[itemIndex].stackNumber > 1) {
                 
                 // modify item stack number
                 let normalStackSelect = document.querySelector(`.${itemName} .stack-number`);
-                let modStackSelect = document.querySelector(`.${itemName} .stack-number-mod`);
                 let stackCounter = dataItems[itemIndex].stackNumber;
                 
-                if (normalStackSelect) {
-                    normalStackSelect.innerHTML = `x${dataItems[itemIndex].stackNumber}`;
-                    // change position of # on digit count (could make into a callable function)
-                    if (stackCounter > 9 && stackCounter < 100) {
-                        normalStackSelect.style.left = '-35px';
-                    } else if (stackCounter > 99) {
-                        normalStackSelect.style.left = '-45px';
-                    }
-                } else if (modStackSelect) {
-                    modStackSelect.innerHTML = `x${dataItems[itemIndex].stackNumber}`;
-                    // change position of # on digit count
-                    if (stackCounter > 9 && stackCounter < 100) {
-                        modStackSelect.style.left = '-35px';
-                    } else if (stackCounter > 99) {
-                        modStackSelect.style.left = '-45px';
-                    }
+                normalStackSelect.innerHTML = `x${dataItems[itemIndex].stackNumber}`;
+                // change position of # on digit count (could make into a callable function)
+                if (stackCounter > 9 && stackCounter < 100) {
+                    normalStackSelect.style.left = '-35px';
+                } else if (stackCounter > 99) {
+                    normalStackSelect.style.left = '-45px';
                 }
 
                 
