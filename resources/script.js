@@ -549,93 +549,71 @@ var itemCalculation = (function () {
                 total: 0
             },
             {
-                itemName: 'kjaros-band',
-                displayName: 'Kjaro\'s Band',
+                itemName: 'razorwire',
+                displayName: 'Razorwire',
                 rarity: 'uncommon',
-                // 8% chance on hit to unleash a flame tornado
-                effect: 'damage',
+                // deals 160% dam to and number of targets in a given radius
+                effect: 'targets-hit',
                 stackType: 'linear',
-                percentage: true,
-                value: 5.00,
-                stackValue: 2.50,
+                value: 5,
+                stackValue: 2,
                 stackNumber: 0,
-                total: 0
+                total: 0,
+                secondEffect: 'aoe',
+                secondStackType: 'linear',
+                secondValue: 25,
+                secondStackValue: 10,
+                secondStackNumber: 0,
+                secondTotal: 0
             },
             {
-                itemName: 'kjaros-band',
-                displayName: 'Kjaro\'s Band',
+                itemName: 'red-whip',
+                displayName: 'Red Whip',
                 rarity: 'uncommon',
-                // 8% chance on hit to unleash a flame tornado
-                effect: 'damage',
+                // 30% move speed after not using a skill for 5s
+                effect: 'movement-speed',
                 stackType: 'linear',
                 percentage: true,
-                value: 5.00,
-                stackValue: 2.50,
+                value: 0.30,
+                stackValue: 0.30,
                 stackNumber: 0,
                 total: 0,
             },
             {
-                itemName: 'kjaros-band',
-                displayName: 'Kjaro\'s Band',
+                itemName: 'rose-buckler',
+                displayName: 'Rose Buckler',
                 rarity: 'uncommon',
-                // 8% chance on hit to unleash a flame tornado
-                effect: 'damage',
+                // 30% increase to armor while sprinting
+                effect: 'armor',
                 stackType: 'linear',
-                percentage: true,
-                value: 5.00,
-                stackValue: 2.50,
+                value: 30,
+                stackValue: 30,
                 stackNumber: 0,
                 total: 0,
             },
             {
-                itemName: 'kjaros-band',
-                displayName: 'Kjaro\'s Band',
+                itemName: 'runalds-band',
+                displayName: 'Runald\'s Band',
                 rarity: 'uncommon',
-                // 8% chance on hit to unleash a flame tornado
+                // 8% chance on hit to slow enemy by 80% and deal given damage
                 effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
-                value: 5.00,
-                stackValue: 2.50,
+                value: 2.50,
+                stackValue: 1.25,
                 stackNumber: 0,
                 total: 0,
             },
             {
-                itemName: 'kjaros-band',
-                displayName: 'Kjaro\'s Band',
+                itemName: 'squid-polyp',
+                displayName: 'Squid Polyp',
                 rarity: 'uncommon',
-                // 8% chance on hit to unleash a flame tornado
-                effect: 'damage',
+                // interactables summon turret that attacks at given attack speed.  lasts 30s
+                effect: 'attack-speed',
                 stackType: 'linear',
                 percentage: true,
-                value: 5.00,
-                stackValue: 2.50,
-                stackNumber: 0,
-                total: 0,
-            },
-            {
-                itemName: 'kjaros-band',
-                displayName: 'Kjaro\'s Band',
-                rarity: 'uncommon',
-                // 8% chance on hit to unleash a flame tornado
-                effect: 'damage',
-                stackType: 'linear',
-                percentage: true,
-                value: 5.00,
-                stackValue: 2.50,
-                stackNumber: 0,
-                total: 0,
-            },
-            {
-                itemName: 'kjaros-band',
-                displayName: 'Kjaro\'s Band',
-                rarity: 'uncommon',
-                // 8% chance on hit to unleash a flame tornado
-                effect: 'damage',
-                stackType: 'linear',
-                percentage: true,
-                value: 5.00,
-                stackValue: 2.50,
+                value: 1.00,
+                stackValue: 1.00,
                 stackNumber: 0,
                 total: 0,
             },
@@ -658,9 +636,34 @@ var itemCalculation = (function () {
                 secondTotal: 0
             },
             {
+                itemName: 'war-horn',
+                displayName: 'War Horn',
+                rarity: 'uncommon',
+                // equipment activation increases attack speed 70% for given seconds
+                effect: 'duration',
+                stackType: 'linear',
+                value: 8,
+                stackValue: 4,
+                stackNumber: 0,
+                total: 0,
+            },
+            {
+                itemName: 'wax-quail',
+                displayName: 'Wax Quail',
+                rarity: 'uncommon',
+                // jumping when sprinting boosts given meters
+                effect: 'jump-boost',
+                stackType: 'linear',
+                value: 10,
+                stackValue: 10,
+                stackNumber: 0,
+                total: 0,
+            },
+            {
                 itemName: 'will-o-the-wisp',
                 displayName: 'Will-o\'-the-wisp',
                 rarity: 'uncommon',
+                // spawn lava pillar on kill in radius for given dam
                 effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
@@ -717,21 +720,14 @@ var itemCalculation = (function () {
             },
             {
                 stackType: 'exponential',
-                operation: function(itemIndex, hasSecondEffect) {
+                operation: function(itemIndex) {
                     let itemGroup = data.items[itemIndex];
-                    if (hasSecondEffect === false) {
-                        itemGroup.stackNumber += 1;
-                        if (itemGroup.total === 0) {
-                            itemGroup.total += itemGroup.value;
-                        } else {
-                            itemGroup.total += itemGroup.total;
-                        }
-                    } else if (hasSecondEffect === true) {
+                    if (itemGroup.itemName === 'fuel-cell') {
                         itemGroup.secondStackNumber += 1;
                         if (itemGroup.secondTotal === 0) {
-                            itemGroup.secondTotal += itemGroup.secondValue;
+                            itemGroup.secondTotal = itemGroup.secondValue;
                         } else {
-                            itemGroup.secondTotal += itemGroup.secondStackTotal;
+                            itemGroup.secondTotal = 1 - (Math.pow((1 - itemGroup.secondStackValue), itemGroup.secondStackNumber));
                         }
                     }
                 }
@@ -788,16 +784,13 @@ var itemCalculation = (function () {
 
              var itemIndex;
              console.log(itemName);
-             if (itemName === 'soldiers-syringe') {
-                 itemIndex = 0;
-             } else {
                  data.items.forEach(function(element) {
                      if (itemName === element.itemName) {
                          itemIndex = data.items.indexOf(element);
                          return itemIndex;
                      }
                  })
-             }
+             //}
              console.log('itemIndex is: ',itemIndex);
              return itemIndex;
         }

@@ -38,3 +38,37 @@ var calculate = function(itemName) {
         data.calculation[secondCalcIndex].operation(itemIndex, hasSecondEffect);
     }
 }
+
+
+
+
+
+
+/* ------exponential calculation notes------ */
+
+
+var cooldown, stack, initValue;
+initValue = .15;
+stack = 0;
+
+function exponent() {
+  stack += 1;
+  console.log(stack);
+  // **cooldown refers to the cooldown of the individual item in seconds**  i.e.:
+  cooldown = 15;
+  cooldown = cooldown * (Math.pow((1 - initValue), stack));
+  console.log(cooldown);
+  return cooldown;
+  // ***absolute cooldown reduction formula is 1-(Math.pow((1-initValue), stack))***
+}
+
+exponent();
+exponent();
+exponent();
+exponent();
+exponent();
+exponent();
+exponent();
+exponent();
+exponent();
+exponent();
