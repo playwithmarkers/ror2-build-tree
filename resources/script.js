@@ -20,9 +20,9 @@ var itemCalculation = (function () {
             {
                 itemName: 'armor-piercing-rounds',
                 displayName: 'Armor-Piercing Rounds',
+                description: 'Deal an additional 20% damage (+20% per stack) to bosses.',
                 rarity: 'common',
                 effect: 'damage',
-                // damage from effect is dealt to bosses only
                 stackType: 'linear',
                 percentage: true,
                 value: 0.20,
@@ -33,9 +33,9 @@ var itemCalculation = (function () {
             {
                 itemName: 'backup-magazine',
                 displayName: 'Backup Magazine',
+                description: 'Add +1 (+1 per stack) charge of your Secondary skill.',
                 rarity: 'common',
                 effect: 'secondary-charge',
-                // add additional charge to secondary skill
                 stackType: 'linear',
                 value: 1,
                 stackValue: 1,
@@ -45,9 +45,9 @@ var itemCalculation = (function () {
             {
                 itemName: 'bundle-of-fireworks',
                 displayName: 'Bundle of Fireworks',
+                description: 'Opening a chest launches 8 (+4 per stack) fireworks that deal 300% base damage.',
                 rarity: 'common',
                 effect: 'fireworks',
-                // launch fireworks on chest open.  300% base damage
                 stackType: 'linear',
                 value: 8,
                 stackValue: 4,
@@ -57,6 +57,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'bustling-fungus',
                 displayName: 'Bustling Fungus',
+                description: 'After standing still for 2 seconds, create a zone that heals for 4.5% (+2.25% per stack) of your health every second to all allies within 3m (+1.5m per stack).',
                 rarity: 'common',
                 effect: 'healing',
                 stackType: 'linear',
@@ -65,7 +66,6 @@ var itemCalculation = (function () {
                 stackValue: 0.0225,
                 stackNumber: 0,
                 total: 0,
-                // aoe is a radius in meters
                 secondEffect: 'aoe',
                 secondStackType: 'linear',
                 secondValue: 3,
@@ -76,8 +76,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'cautious-slug',
                 displayName: 'Cautious Slug',
+                description: 'Increases passive health regeneration by 250% (+150% per stack) while outside of combat.',
                 rarity: 'common',
-                // heal when out of combat
                 effect: 'healing',
                 stackType: 'linear',
                 percentage: true,
@@ -89,8 +89,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'crowbar',
                 displayName: 'Crowbar',
+                description: 'Deal 150% (+30% per stack) damage to enemies above 90% health.',
                 rarity: 'common',
-                // damage only to enemies above 90% health
                 effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
@@ -102,6 +102,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'energy-drink',
                 displayName: 'Energy Drink',
+                description: 'Sprint speed is improved by 30% (+20% per stack).',
                 rarity: 'common',
                 effect: 'sprint-speed',
                 stackType: 'linear',
@@ -114,8 +115,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'focus-crystal',
                 displayName: 'Focus Crystal',
+                description: 'Increase damage to enemies within 13m by 15% (+15% per stack).',
                 rarity: 'common',
-                // increase damage to enemies within 13m 
                 effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
@@ -127,11 +128,10 @@ var itemCalculation = (function () {
             {
                 itemName: 'fresh-meat',
                 displayName: 'Fresh Meat',
+                description: 'Increases base health regeneration by +2 hp/s for 3s (+3s per stack) after killing an enemy.',
                 rarity: 'common',
-                // increase by 2hp/s for base of 3s (+3s per stack) after kill
                 effect: 'healing',
                 stackType: 'linear',
-                // value and stackValue measured in seconds
                 value: 3,
                 stackValue: 3,
                 stackNumber: 0,
@@ -140,6 +140,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'gasoline',
                 displayName: 'Gasoline',
+                description: 'Killing an enemy ignites all enemies within 12m (+4m per stack).  Enemies burn for 150% (+75% per stack) base damage.',
                 rarity: 'common',
                 effect: 'damage',
                 stackType: 'linear',
@@ -158,6 +159,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'lens-makers-glasses',
                 displayName: 'Lens-Maker\'s Glasses', 
+                description: 'Your attacks have a 10% (+10% per stack) chance to Critically Strike, dealing double damage.',
                 rarity: 'common',
                 effect: 'critical-chance', 
                 stackType: 'linear',
@@ -170,8 +172,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'medkit',
                 displayName: 'Medkit',
+                description: 'Heal for 10 (+10 per stack) health 1.1 seconds after getting hurt.',
                 rarity: 'common',
-                // effect applies 1.1s after injury
                 effect: 'healing',
                 stackType: 'linear',
                 value: 10,
@@ -182,8 +184,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'monster-tooth',
                 displayName: 'Monster Tooth', 
+                description: 'Killing an enemy spawns a healing orb that heals for 4 (+4 per stack) health.',
                 rarity: 'common',
-                // drops a healing orb on kill
                 effect: 'healing', 
                 stackType: 'linear', 
                 value: 4, 
@@ -194,6 +196,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'pauls-goat-hoof',
                 displayName: 'Paul\'s Goat Hoof',
+                description: 'Increases movement speed by 14% (+14% per stack).',
                 rarity: 'common',
                 effect: 'movement-speed',
                 stackType: 'linear',
@@ -206,6 +209,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'personal-shield-generator',
                 displayName: 'Personal Shield Generator',
+                description: 'Gain a 25 (+25 per stack) health shield. Recharges outside of danger.',
                 rarity: 'common',
                 effect: 'shield',
                 stackType: 'linear',
@@ -217,8 +221,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'repulsion-armor-plate',
                 displayName: 'Repulsion Armor Plate',
+                description: 'Reduce all incoming damage by 5 (+5 per stack). Cannot be reduced below 1.',
                 rarity: 'common',
-                // cannot be reduced below 1
                 effect: 'damage-reduction',
                 stackType: 'linear',
                 value: 5,
@@ -229,6 +233,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'rusted-key',
                 displayName: 'Rusted Key',
+                description: 'A hidden cache containing an item will appear in a random location in each stage. (Increases rarity of the item per stack).',
                 rarity: 'common',
                 effect: 'drop-chance',
                 stackType: 'special',
@@ -240,6 +245,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'soldiers-syringe',
                 displayName: 'Soldier\'s Syringe', 
+                description: 'Increases attack speed by 15% (+15% per stack).',
                 rarity: 'common',
                 effect: 'attack-speed', 
                 stackType: 'linear',
@@ -252,6 +258,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'sticky-bomb',
                 displayName: 'Sticky Bomb',
+                description: '5% (+2.5% per stack) chance on hit to attach a bomb to an enemy, detonating for 250% damage (+125% per stack).',
                 rarity: 'common',
                 effect: 'damage',
                 stackType: 'linear',
@@ -261,7 +268,6 @@ var itemCalculation = (function () {
                 stackNumber: 0,
                 total: 0,
                 secondEffect: 'trigger-chance',
-                // secondEffect is chance for first effect to trigger
                 secondStackType: 'linear',
                 secondPercentage: true,
                 secondValue: 0.05,
@@ -272,9 +278,9 @@ var itemCalculation = (function () {
             {
                 itemName: 'stun-grenade',
                 displayName: 'Stun Grenade',
+                description: '5% (+5% per stack) chance on hit to stun enemies for 2 seconds.',
                 rarity: 'common',
                 effect: 'stun-chance',
-                // chance to stun on hit for 2s
                 stackType: 'linear',
                 percentage: true,
                 value: 0.05,
@@ -285,9 +291,9 @@ var itemCalculation = (function () {
             {
                 itemName: 'topaz-brooch',
                 displayName: 'Topaz Brooch',
+                description: 'Gain a temporary barrier on kill for 15 health (+15 per stack).',
                 rarity: 'common',
                 effect: 'barrier',
-                // activates on kill.  decays slowly over time
                 stackType: 'linear',
                 value: 15,
                 stackValue: 15,
@@ -297,11 +303,11 @@ var itemCalculation = (function () {
             {
                 itemName: 'tougher-times',
                 displayName: 'Tougher Times', 
+                description: '15% (+15% per stack) chance to block incoming damage. Unaffected by luck.',
                 rarity: 'common',
                 effect: 'block-chance', 
                 stackType: 'hyperbolic',
                 percentage: true,
-                // actual value is around 0.13 
                 value: 0.15, 
                 stackValue: 0.15,
                 stackNumber: 0,
@@ -310,8 +316,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'tri-tip-dagger',
                 displayName: 'Tri-Tip Dagger',
+                description: '15% (+15% per stack) chance to bleed an enemy for 240% base damage.',
                 rarity: 'common',
-                // bleed effect. 240% base damage
                 effect: 'bleed-chance',
                 stackType: 'linear',
                 percentage: true,
@@ -323,10 +329,9 @@ var itemCalculation = (function () {
             {
                 itemName: 'warbanner',
                 displayName: 'Warbanner',
+                description: 'On level up drop a banner that strengthens all allies within 16m (+8m per stack).  Raise attack and movement speed by 30%.',
                 rarity: 'common',
-                // damage and movement-speed increased 30% in aoe
                 effect: 'aoe',
-                // aoe increased radius per stack in meters
                 stackType: 'linear',
                 value: 16,
                 stackValue: 8,
@@ -339,9 +344,9 @@ var itemCalculation = (function () {
             {
                 itemName: 'atg-missile-mk-1',
                 displayName: 'AtG Missile Mk. 1',
+                description: '10% chance to fire a missile that deals 300% (+300% per stack) damage.',
                 rarity: 'uncommon',
                 effect: 'damage',
-                // 10% chance to trigger item on hit
                 stackType: 'linear',
                 percentage: true,
                 value: 3.00,
@@ -352,8 +357,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'bandolier',
                 displayName: 'Bandolier',
+                description: '18% (+10% per stack) chance on kill to drop an ammo pack that resets all skill cooldowns.',
                 rarity: 'uncommon',
-                // 18% chance on kill for drop that resets all skill cooldowns
                 effect: 'drop-chance',
                 stackType: 'special',
                 percentage: true,
@@ -365,8 +370,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'berzerkers-pauldron',
                 displayName: 'Berzerker\'s Pauldron',
+                description: 'Killing 3 enemies within 1 second sends you into a frenzy for 6s (+4s per stack). Increases movement speed by 50% and attack speed by 100%.',
                 rarity: 'uncommon',
-                // activates on killing 3 enemies in 1s.  frenzy increases movement-speed 50% and attack-speed 100%. 6s duration
                 effect: 'frenzy-duration',
                 stackType: 'linear',
                 value: 6,
@@ -377,8 +382,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'chronobauble',
                 displayName: 'Chronobauble',
+                description: 'Slow enemies on hit for -60% movement speed for 2s (+2s per stack).',
                 rarity: 'uncommon',
-                // slow for 60% on hit.  values in seconds
                 effect: 'slow',
                 stackType: 'linear',
                 value: 2,
@@ -389,8 +394,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'death-mark',
                 displayName: 'Death Mark',
+                description: 'Enemies with 4 or more debuffs are marked for death, increasing damage taken by 50% (+50% per stack) from all sources for 7 seconds.',
                 rarity: 'uncommon',
-                // increase damage by 50% from all sources for 7s to enemies with 4+ debuffs
                 effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
@@ -402,6 +407,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'fuel-cell',
                 displayName: 'Fuel Cell',
+                description: 'Hold an additional equipment charge (+1 per stack). Reduce equipment cooldown by 15% (+15% per stack).',
                 rarity: 'uncommon',
                 effect: 'equipment-charge',
                 stackType: 'linear',
@@ -409,7 +415,6 @@ var itemCalculation = (function () {
                 stackValue: 1,
                 stackNumber: 0,
                 total: 0,
-                // reduce equipment cooldown by secondTotal
                 secondEffect: 'equipment-cooldown',
                 secondStackType: 'exponential',
                 secondPercentage: true,
@@ -421,8 +426,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'ghors-tome',
                 displayName: 'Ghor\'s Tome',
+                description: '4% (+4% on stack) chance on kill to drop a treasure worth $25. Scales over time.',
                 rarity: 'uncommon',
-                // chance to drop treasure worth $25 on kill.  scales.
                 effect: 'drop-chance',
                 stackType: 'linear',
                 percentage: true,
@@ -434,8 +439,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'harvesters-scythe',
                 displayName: 'Harvester\'s Scythe',
+                description: 'Gain 5% critical chance (+0% per stack). Critical strikes heal for 8 (+4 per stack) health.',
                 rarity: 'uncommon',
-                // gain 5% crit chance on pickup. crit strikes heal
                 effect: 'healing',
                 stackType: 'linear',
                 value: 8,
@@ -446,6 +451,7 @@ var itemCalculation = (function () {
             {
                 itemName: 'hopoo-feather',
                 displayName: 'Hopoo Feather',
+                description: 'Gain +1 (+1 per stack) maximum jump count.',
                 rarity: 'uncommon',
                 effect: 'extra-jump',
                 stackType: 'linear',
@@ -457,15 +463,14 @@ var itemCalculation = (function () {
             {
                 itemName: 'infusion',
                 displayName: 'Infusion',
+                description: 'Killing an enemy increases your health permanently by 1 (+1 per stack), up to a maximum of 100 (+100 per stack) health.',
                 rarity: 'uncommon',
-                // increase health permanently by 1.  capped by secondEffect
                 effect: 'health-increase',
                 stackType: 'linear',
                 value: 1,
                 stackValue: 1,
                 stackNumber: 0,
                 total: 0,
-                // total health increase available
                 secondEffect: 'health-addition',
                 secondStackType: 'linear',
                 secondValue: 100,
@@ -476,8 +481,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'kjaros-band',
                 displayName: 'Kjaro\'s Band',
+                description: '8% chance on hit to strike an enemy with a runic flame tornado, dealing 500% (+250% per stack) TOTAL damage.',
                 rarity: 'uncommon',
-                // 8% chance on hit to unleash a flame tornado
                 effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
@@ -489,8 +494,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'leeching-seed',
                 displayName: 'Leeching Seed',
+                description: 'Dealing damage heals you for 1 (+1 per stack) health.',
                 rarity: 'uncommon',
-                // dealing damage heals you
                 effect: 'healing',
                 stackType: 'linear',
                 value: 1,
@@ -501,8 +506,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'lepton-daisy',
                 displayName: 'Lepton Daisy',
+                description: 'Release a healing nova during the Teleporter event, healing all nearby allies for 50% of their maximum health. Occurs 1 (+1 per stack) times.',
                 rarity: 'uncommon',
-                // healing nova during teleporter event healing all for 50% of max health.  occurs ${total} times
                 effect: 'healing-nova',
                 stackType: 'linear',
                 value: 1,
@@ -513,8 +518,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'old-guillotine',
                 displayName: 'Old Guillotine',
+                description: 'Instantly kill Elite monsters below 20% (+20% per stack) health.',
                 rarity: 'uncommon',
-                // instant kill elites below 20% health (actually starts at 16.7%)
                 effect: 'execution-threshold',
                 stackType: 'hyperbolic',
                 percentage: true,
@@ -526,8 +531,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'old-war-stealthkit',
                 displayName: 'Old War Stealthkit',
+                description: 'Chance on taking damage to gain 40% movement speed and invisibility for 3s (+1.5s per stack). Chance increases the more damage you take.',
                 rarity: 'uncommon',
-                // chance on damage taken to gain 40% movement-speed and invisibilty for ${total} in seconds
                 effect: 'duration',
                 stackType: 'linear',
                 value: 3,
@@ -538,21 +543,21 @@ var itemCalculation = (function () {
             {
                 itemName: 'predatory-instincts',
                 displayName: 'Predatory Instincts',
+                description: 'Gain 5% critical chance (+0% per stack). Critical strikes increase attack speed by 12%. Maximum cap of 36% (+24% per stack) attack speed.',
                 rarity: 'uncommon',
-                // +5% crit chance on pickup.  crit strikes increase attack-speed by 12%
-                effect: 'damage',
+                effect: 'attack-speed-cap',
                 stackType: 'linear',
                 percentage: true,
-                value: 5.00,
-                stackValue: 2.50,
+                value: 0.36,
+                stackValue: 0.24,
                 stackNumber: 0,
                 total: 0
             },
             {
                 itemName: 'razorwire',
                 displayName: 'Razorwire',
+                description: 'Getting hit causes you to explode in a burst of razors, dealing 160% damage. Hits up to 5 (+2 per stack) targets in a 25m (+10m per stack) radius.',
                 rarity: 'uncommon',
-                // deals 160% dam to and number of targets in a given radius
                 effect: 'targets-hit',
                 stackType: 'linear',
                 value: 5,
@@ -569,8 +574,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'red-whip',
                 displayName: 'Red Whip',
+                description: 'Leaving combat boosts your movement speed by 30% (+30% per stack).',
                 rarity: 'uncommon',
-                // 30% move speed after not using a skill for 5s
                 effect: 'movement-speed',
                 stackType: 'linear',
                 percentage: true,
@@ -582,8 +587,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'rose-buckler',
                 displayName: 'Rose Buckler',
+                description: 'Increase armor by 30 (+30 per stack) while sprinting.',
                 rarity: 'uncommon',
-                // 30% increase to armor while sprinting
                 effect: 'armor',
                 stackType: 'linear',
                 value: 30,
@@ -594,8 +599,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'runalds-band',
                 displayName: 'Runald\'s Band',
+                description: '8% chance on hit to strike an enemy with a runic ice blast, slowing them by 80% and dealing 250% (+125% per stack) TOTAL damage.',
                 rarity: 'uncommon',
-                // 8% chance on hit to slow enemy by 80% and deal given damage
                 effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
@@ -607,8 +612,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'squid-polyp',
                 displayName: 'Squid Polyp',
+                description: 'Activating an interactable summons a Squid Turret that attacks nearby enemies at 100% (+100% per stack) attack speed. Lasts 30 seconds.',
                 rarity: 'uncommon',
-                // interactables summon turret that attacks at given attack speed.  lasts 30s
                 effect: 'attack-speed',
                 stackType: 'linear',
                 percentage: true,
@@ -620,9 +625,9 @@ var itemCalculation = (function () {
             {
                 itemName: 'ukulele',
                 displayName: 'Ukulele',
+                description: '25% chance to fire chain lightning for 80% damage up to 3 (+2 per stack) targets within 20m (+2m per stack).',
                 rarity: 'uncommon',
                 effect: 'targets',
-                // 25% chance to trigger chain lightning.  80% TOTAL damage
                 stackType: 'linear',
                 value: 3,
                 stackValue: 2,
@@ -638,8 +643,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'war-horn',
                 displayName: 'War Horn',
+                description: 'Activating your Equipment gives you +70% attack speed for 8s (+4s per stack).',
                 rarity: 'uncommon',
-                // equipment activation increases attack speed 70% for given seconds
                 effect: 'duration',
                 stackType: 'linear',
                 value: 8,
@@ -650,8 +655,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'wax-quail',
                 displayName: 'Wax Quail',
+                description: 'Jumping while sprinting boosts you forward by 10m (+10m per stack).',
                 rarity: 'uncommon',
-                // jumping when sprinting boosts given meters
                 effect: 'jump-boost',
                 stackType: 'linear',
                 value: 10,
@@ -662,8 +667,8 @@ var itemCalculation = (function () {
             {
                 itemName: 'will-o-the-wisp',
                 displayName: 'Will-o\'-the-wisp',
+                description: 'On killing an enemy, spawn a lava pillar in a 12m (+2.4m per stack) radius for 350% (+280% per stack) base damage.',
                 rarity: 'uncommon',
-                // spawn lava pillar on kill in radius for given dam
                 effect: 'damage',
                 stackType: 'linear',
                 percentage: true,
@@ -842,7 +847,9 @@ var UIController = (function() {
                 document.querySelector('.item-list').insertAdjacentHTML('beforeend', `
                 
                 <div class="${itemName} item-list-item">
-                    <img src="dist/img/nobg-img/${dataItems[itemIndex].itemName}.png" alt="${dataItems[itemIndex].itemName}" class="item-list-img ${dataItems[itemIndex].rarity}">
+                <div class="item tooltip">
+                    <img src="dist/img/nobg-img/${dataItems[itemIndex].itemName}.png" alt="${dataItems[itemIndex].itemName}" class="item-list-img item-img ${dataItems[itemIndex].rarity}" data-tippy-content="${dataItems[itemIndex].description}"><span class="tooltiptext"></span>
+                </div>
                     <div class="item-description">
                         <h3>${dataItems[itemIndex].displayName}</h3>
                         <div class="item-effect">
@@ -851,13 +858,18 @@ var UIController = (function() {
                         </div>
                     </div>
                     <div class="stack-number">x${dataItems[itemIndex].stackNumber}</div>
-                </div>`);
+                </div>
+                
+                `);
+
+                tippy('[data-tippy-content]');
 
                 if (dataItems[itemIndex].secondEffect) {
                     
                     document.querySelector(`.${itemName} .item-description`).insertAdjacentHTML('beforeend', `<div class="second-item-effect">${dataItems[itemIndex].secondEffect}: <span class="second-item-total">${secondItemTotal}</span></div></div>`);
 
-                    document.querySelector(`.${itemName} .stack-number`).style.top = '-8px';
+                    //document.querySelector(`.${itemName} .stack-number`).style.position = 'relative';
+                    document.querySelector(`.${itemName} .stack-number`).style.top = '-82px';
                 }
 
             } else if (dataItems[itemIndex].stackNumber > 1) {
@@ -869,9 +881,9 @@ var UIController = (function() {
                 normalStackSelect.innerHTML = `x${dataItems[itemIndex].stackNumber}`;
                 // change position of # on digit count (could make into a callable function)
                 if (stackCounter > 9 && stackCounter < 100) {
-                    normalStackSelect.style.left = '-35px';
+                    normalStackSelect.style.left = '33px';
                 } else if (stackCounter > 99) {
-                    normalStackSelect.style.left = '-45px';
+                    normalStackSelect.style.left = '23px';
                 }
 
                 
@@ -886,6 +898,23 @@ var UIController = (function() {
             }
                    
         },
+
+        loadItems: function(items) {
+
+            items.forEach((element) => {
+                
+                document.querySelector('.grid-container').insertAdjacentHTML('beforeend', `
+                    
+                    <div class="item">
+                        <img src="dist/img/nobg-img/${element.itemName}.png" alt="${element.itemName}" class="item-img ${element.rarity}" data-tippy-content="${element.description}">
+                    </div>
+                    
+                `);
+                
+            })
+
+
+        }
     }
 })();
 
@@ -898,6 +927,8 @@ var appController = (function(itemCalc, UICtrl) {
     var itemID;
 
     var setUpEventListeners = function() {
+        window.addEventListener('load', UICtrl.loadItems(data.items));
+        tippy('[data-tippy-content]');
         document.querySelector('.container-left').addEventListener('click', addItem);
     }
 
@@ -912,10 +943,6 @@ var appController = (function(itemCalc, UICtrl) {
         itemID = event.target.alt;
         return itemID;
     }
-
-    /* var displayItems = function() {
-        UICtrl.updateValues(data.items);
-    } */
 
     return {
         init: () => {
