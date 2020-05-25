@@ -15,7 +15,7 @@ var itemCalculation = (function () {
     var data = {
         items: [
 
-/* -------------- COMMON ITEMS ------------- */
+            /* -------------- COMMON ITEMS ------------- */
 
             {
                 itemName: 'armor-piercing-rounds',
@@ -339,7 +339,7 @@ var itemCalculation = (function () {
                 total: 0  
             },
             
-/* -------------- UNCOMMON ITEMS ------------- */
+            /* -------------- UNCOMMON ITEMS ------------- */
 
             {
                 itemName: 'atg-missile-mk-1',
@@ -684,6 +684,47 @@ var itemCalculation = (function () {
                 secondTotal: 0
             },
 
+            /* -------------- LEGENDARY ITEMS ------------- */
+            
+            {
+                itemName: 'fifty-seven-leaf-clover',
+                displayName: '57 Leaf Clover',
+                description: 'All random effects are rolled +1 (+1 per stack) times for a favorable outcome.',
+                rarity: 'legendary',
+                effect: 'luck',
+                stackType: 'linear',
+                value: 1,
+                stackValue: 1,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'aegis',
+                displayName: 'Aegis',
+                description: 'Healing past full grants you a temporary barrier for 50% (+50% per stack) of the amount you healed.',
+                rarity: 'legendary',
+                effect: 'healing-converted',
+                stackType: 'linear',
+                percentage: true,
+                value: 0.50,
+                stackValue: 0.50,
+                stackNumber: 0,
+                total: 0
+            },
+            {
+                itemName: 'alien-head',
+                displayName: 'Alien Head',
+                description: 'Reduce skill cooldowns by 25% (+25% per stack).',
+                rarity: 'legendary',
+                effect: 'skill-cooldown',
+                stackType: 'exponential',
+                percentage: true,
+                value: 0.25,
+                stackValue: 0.25,
+                stackNumber: 0,
+                total: 0
+            }
+
         ],
         calculation: [
             {
@@ -733,6 +774,13 @@ var itemCalculation = (function () {
                             itemGroup.secondTotal = itemGroup.secondValue;
                         } else {
                             itemGroup.secondTotal = 1 - (Math.pow((1 - itemGroup.secondStackValue), itemGroup.secondStackNumber));
+                        }
+                    } else if (itemGroup.itemName === 'alien-head') {
+                        itemGroup.stackNumber += 1;
+                        if (itemGroup.total === 0) {
+                            itemGroup.total = itemGroup.value;
+                        } else {
+                            itemGroup.total = 1 - (Math.pow((1 - itemGroup.stackValue), itemGroup.stackNumber));
                         }
                     }
                 }
@@ -847,9 +895,9 @@ var UIController = (function() {
                 document.querySelector('.item-list').insertAdjacentHTML('beforeend', `
                 
                 <div class="${itemName} item-list-item">
-                <div class="item tooltip">
-                    <img src="dist/img/nobg-img/${dataItems[itemIndex].itemName}.png" alt="${dataItems[itemIndex].itemName}" class="item-list-img item-img ${dataItems[itemIndex].rarity}" data-tippy-content="${dataItems[itemIndex].description}"><span class="tooltiptext"></span>
-                </div>
+                    <div class="item">
+                        <img src="dist/img/nobg-img/${dataItems[itemIndex].itemName}.png" alt="${dataItems[itemIndex].itemName}" class="item-list-img item-img ${dataItems[itemIndex].rarity}" data-tippy-content="${dataItems[itemIndex].description}">
+                    </div>
                     <div class="item-description">
                         <h3>${dataItems[itemIndex].displayName}</h3>
                         <div class="item-effect">
@@ -866,7 +914,13 @@ var UIController = (function() {
 
                 if (dataItems[itemIndex].secondEffect) {
                     
-                    document.querySelector(`.${itemName} .item-description`).insertAdjacentHTML('beforeend', `<div class="second-item-effect">${dataItems[itemIndex].secondEffect}: <span class="second-item-total">${secondItemTotal}</span></div></div>`);
+                    document.querySelector(`.${itemName} .item-description`).insertAdjacentHTML('beforeend', `
+                    
+                    <div class="second-item-effect">
+                        ${dataItems[itemIndex].secondEffect}: <span class="second-item-total">${secondItemTotal}</span>
+                    </div>
+                    
+                    `);
 
                     //document.querySelector(`.${itemName} .stack-number`).style.position = 'relative';
                     document.querySelector(`.${itemName} .stack-number`).style.top = '-82px';
@@ -940,6 +994,7 @@ var appController = (function(itemCalc, UICtrl) {
     }
     
     var getItemName = function(event) {
+        // using the img alt to call the item object is probably not very accessiblity friendly and should probably be reworked
         itemID = event.target.alt;
         return itemID;
     }
