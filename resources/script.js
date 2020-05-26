@@ -849,22 +849,14 @@ var itemCalculation = (function () {
         calculation: [
             {
                 stackType: 'linear', 
-                operation: function(itemIndex, hasSecondEffect) {
-                    let itemGroup = data.items[itemIndex];
-                    if (hasSecondEffect === false) {
-                        itemGroup.stackNumber += 1;
-                        if (itemGroup.total === 0) {
-                            itemGroup.total += itemGroup.value;
-                        } else {
-                            itemGroup.total += itemGroup.stackValue;
-                        }
-                    } else if (hasSecondEffect === true) {
-                        itemGroup.secondStackNumber += 1;
-                        if (itemGroup.secondTotal === 0) {
-                            itemGroup.secondTotal += itemGroup.secondValue;
-                        } else {
-                            itemGroup.secondTotal += itemGroup.secondStackValue;
-                        }
+                operation: function(itemIndex, effIndex) {
+                    console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
+                    let itemEffectGroup = data.items[itemIndex].effects[effIndex];
+                    itemEffectGroup.stackNumber += 1;
+                    if (itemEffectGroup.total === 0) {
+                        itemEffectGroup.total += itemEffectGroup.value;
+                    } else {
+                        itemEffectGroup.total += itemEffectGroup.stackValue;
                     }
                     
                     console.log(data.items);
@@ -872,51 +864,48 @@ var itemCalculation = (function () {
             },
             {
                 stackType: 'hyperbolic',
-                operation: function(itemIndex, hasSecondEffect) {
-                    let itemGroup = data.items[itemIndex];
-                    if (hasSecondEffect === false) {
-                        itemGroup.stackNumber += 1;
-                        itemGroup.total = 1 - 1 / (1 + itemGroup.stackValue * itemGroup.stackNumber);
-                        console.log(itemGroup);
-                    } else if (hasSecondEffect === true) {
-                        itemGroup.secondStackNumber += 1;
-                        itemGroup.secondTotal = 1 - 1 / (1 + itemGroup.secondStackValue * itemGroup.secondStackNumber);
-                    }
+                operation: function(itemIndex, effIndex) {
+                    console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
+                    let itemEffectGroup = data.items[itemIndex].effects[effIndex];
+                    itemEffectGroup.stackNumber += 1;
+                    itemEffectGroup.total = 1 - 1 / (1 + itemEffectGroup.stackValue * itemEffectGroup.stackNumber);
+
+                    console.log(data.items);
                 }
             },
             {
                 stackType: 'exponential',
-                operation: function(itemIndex) {
+                operation: function(itemIndex, effIndex) {
+                    console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
                     let itemGroup = data.items[itemIndex];
-                    if (itemGroup.itemName === 'fuel-cell') {
-                        itemGroup.secondStackNumber += 1;
-                        if (itemGroup.secondTotal === 0) {
-                            itemGroup.secondTotal = itemGroup.secondValue;
+                    let itemEffectGroup = itemGroup.effects[effIndex];
+                    itemEffectGroup.stackNumber += 1;
+                    if (itemGroup.itemName === 'fuel-cell' || itemGroup.itemName === 'alien-head') {
+                        if (itemEffectGroup.total === 0) {
+                            itemEffectGroup.total = itemEffectGroup.value;
                         } else {
-                            itemGroup.secondTotal = 1 - (Math.pow((1 - itemGroup.secondStackValue), itemGroup.secondStackNumber));
-                        }
-                    } else if (itemGroup.itemName === 'alien-head') {
-                        itemGroup.stackNumber += 1;
-                        if (itemGroup.total === 0) {
-                            itemGroup.total = itemGroup.value;
-                        } else {
-                            itemGroup.total = 1 - (Math.pow((1 - itemGroup.stackValue), itemGroup.stackNumber));
+                            itemEffectGroup.total = 1 - (Math.pow((1 - itemEffectGroup.stackValue), itemEffectGroup.stackNumber));
                         }
                     }
+
+                    console.log(data.items);
                 }
             },
             {
                 stackType: 'special',
-                operation: function(itemIndex) {
+                operation: function(itemIndex, effIndex) {
                     let itemGroup = data.items[itemIndex];
+                    let itemEffectGroup = itemGroup.effects[effIndex];
                     if (itemGroup.itemName === 'bandolier') {
-                        itemGroup.stackNumber += 1;
-                        itemGroup.total = 1 - 1 / Math.pow((1 + itemGroup.stackNumber), 0.33);
+                        itemEffectGroup.stackNumber += 1;
+                        itemEffectGroup.total = 1 - 1 / Math.pow((1 + itemEffectGroup.stackNumber), 0.33);
                     } else if (itemGroup.itemName === 'rusted-key') {
                         // do we want to get into item chance?
-                        itemGroup.stackNumber += 1;
-                        itemGroup.total += itemGroup.stackValue;
+                        itemEffectGroup.stackNumber += 1;
+                        itemEffectGroup.total += itemEffectGroup.stackValue;
                     }
+
+                    console.log(data.items);
                 }
             }
         ]
@@ -931,26 +920,17 @@ var itemCalculation = (function () {
         calculate: function(itemIndex) {
 
             let itemGroup = data.items[itemIndex];
-            let calcIndex, secondCalcIndex, hasSecondEffect;
+            let calcIndex, effIndex;
 
-            data.calculation.forEach(function(element) {
-                if (itemGroup.stackType === element.stackType) {
-                    calcIndex = data.calculation.indexOf(element);
-                    return calcIndex;
-                }
-            })
-            hasSecondEffect = false;
-            data.calculation[calcIndex].operation(itemIndex, hasSecondEffect);
-
-            if (itemGroup.secondEffect) {
-                data.calculation.forEach(function(element) {
-                    if (itemGroup.secondStackType === element.stackType) {
-                        secondCalcIndex = data.calculation.indexOf(element);
+            data.calculation.forEach(function(element1) {
+                itemGroup.effects.forEach(function(element2) {
+                    if (element1.stackType === element2.stackType) {
+                        calcIndex = data.calculation.indexOf(element1);
+                        effIndex = itemGroup.effects.indexOf(element2);
+                        data.calculation[calcIndex].operation(itemIndex, effIndex);
                     }
                 })
-                hasSecondEffect = true
-                data.calculation[secondCalcIndex].operation(itemIndex, hasSecondEffect);
-            }
+            })
         },
 
         getItemIndex: function(itemName) {
@@ -963,7 +943,6 @@ var itemCalculation = (function () {
                          return itemIndex;
                      }
                  })
-             //}
              console.log('itemIndex is: ',itemIndex);
              return itemIndex;
         }
