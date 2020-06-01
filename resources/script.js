@@ -2,17 +2,15 @@
 
 /* Section notes and ideas:
 
-Perhaps effects should be further nested as an object or array within the itemName object so we can have multiple effects that are better organized on each item.
-
 **Possible to move entire section to a different file?
 
 ***Create an effects sub object in the data object?  A place to store all the effects and their values.
 
 */
 
-var itemCalculation = (function () {
+const itemCalculation = (function () {
 
-    var data = {
+    const data = {
         items: [
 
             /* -------------- COMMON ITEMS ------------- */
@@ -917,16 +915,16 @@ var itemCalculation = (function () {
             return data;
         },
 
-        calculate: function(itemIndex) {
+        calculate: function(itemIndex, effIndexes) {
 
-            let itemGroup = data.items[itemIndex];
-            let calcIndex, effIndex;
+            const itemGroup = data.items[itemIndex];
+            let calcIndex;
 
-            data.calculation.forEach(function(element1) {
-                itemGroup.effects.forEach(function(element2) {
-                    if (element1.stackType === element2.stackType) {
-                        calcIndex = data.calculation.indexOf(element1);
-                        effIndex = itemGroup.effects.indexOf(element2);
+            data.calculation.forEach(function(calcElement) {
+                effIndexes.forEach(function(effIndex) {
+                    if (calcElement.stackType === itemGroup.effects[effIndex].stackType) {
+
+                        calcIndex = data.calculation.indexOf(calcElement);
                         data.calculation[calcIndex].operation(itemIndex, effIndex);
                     }
                 })
@@ -935,7 +933,7 @@ var itemCalculation = (function () {
 
         getItemIndex: function(itemName) {
 
-             var itemIndex;
+             let itemIndex;
              console.log(itemName);
                  data.items.forEach(function(element) {
                      if (itemName === element.itemName) {
@@ -945,6 +943,21 @@ var itemCalculation = (function () {
                  })
              console.log('itemIndex is: ',itemIndex);
              return itemIndex;
+        },
+
+        getEffectIndexes: function(itemIndex) {
+
+            const itemGroup = data.items[itemIndex];
+            let effArray = [];
+            let effIndex;
+            itemGroup.effects.forEach(function(element) {
+                if (element) {
+                    effIndex = itemGroup.effects.indexOf(element);
+                    effArray.push(effIndex);
+                }
+            })
+            return effArray;
+
         }
     }
 
@@ -956,41 +969,24 @@ var itemCalculation = (function () {
 
 See Figma prototype.
 
-Display item image to the left in the item container and item name to its right.
-
-Display each effect with its stack number and total underneath item name on separate lines.
-
 */  
 
-var UIController = (function() {
+const UIController = (function() {
 
 
 
     return {
-        updateValues: function(itemIndex, dataItems, itemName) {
-            
-            // this is ugly af and should probably be refactored into some DRY functions
-            
-            /* ----- Display floating numbers as percentage where needed ----- */
-            var itemTotal, secondItemTotal;
-            
-            if (dataItems[itemIndex].percentage) {
-                itemTotal = Math.round((dataItems[itemIndex].total + Number.EPSILON) * 1000) / 10 + '%';
-            } else {
-                itemTotal = dataItems[itemIndex].total;
-            }
+        displaySelectedItem: function(itemIndex, effIndexes, dataItems) {
 
-            if (dataItems[itemIndex].secondEffect) {
-                if (dataItems[itemIndex].secondPercentage) {
-                    secondItemTotal = Math.round((dataItems[itemIndex].secondTotal + Number.EPSILON) * 1000) / 10 + '%';
-                } else {
-                    secondItemTotal = dataItems[itemIndex].secondTotal;
-                }
-            }
-            /* ----- ------------------------------------------------ ----- */
-
-            if (dataItems[itemIndex].stackNumber === 1) {
+            let itemName, stackCounter;
             
+            itemName = dataItems[itemIndex].itemName;
+
+            stackCounter = dataItems[itemIndex].effects[0].stackNumber;
+            
+            if (stackCounter === 1) {
+            
+                // display initial image, title and stack count
                 document.querySelector('.item-list').insertAdjacentHTML('beforeend', `
                 
                 <div class="${itemName} item-list-item">
@@ -999,57 +995,94 @@ var UIController = (function() {
                     </div>
                     <div class="item-description">
                         <h3>${dataItems[itemIndex].displayName}</h3>
-                        <div class="item-effect">
-                            ${dataItems[itemIndex].effect}: 
-                            <span class="item-total">${itemTotal}</span>
-                        </div>
                     </div>
-                    <div class="stack-number">x${dataItems[itemIndex].stackNumber}</div>
+                    <div class="stack-number">x${dataItems[itemIndex].effects[0].stackNumber}</div>
                 </div>
                 
                 `);
 
+                // run tooltips package on new content
                 tippy('[data-tippy-content]');
 
-                if (dataItems[itemIndex].secondEffect) {
-                    
-                    document.querySelector(`.${itemName} .item-description`).insertAdjacentHTML('beforeend', `
-                    
-                    <div class="second-item-effect">
-                        ${dataItems[itemIndex].secondEffect}: <span class="second-item-total">${secondItemTotal}</span>
-                    </div>
-                    
-                    `);
-
-                    //document.querySelector(`.${itemName} .stack-number`).style.position = 'relative';
-                    document.querySelector(`.${itemName} .stack-number`).style.top = '-82px';
-                }
-
-            } else if (dataItems[itemIndex].stackNumber > 1) {
+            } else if (stackCounter > 1) {
                 
                 // modify item stack number
                 let normalStackSelect = document.querySelector(`.${itemName} .stack-number`);
-                let stackCounter = dataItems[itemIndex].stackNumber;
+                normalStackSelect.innerHTML = `x${stackCounter}`;
                 
-                normalStackSelect.innerHTML = `x${dataItems[itemIndex].stackNumber}`;
-                // change position of # on digit count (could make into a callable function)
+                // change position of # on digit count
                 if (stackCounter > 9 && stackCounter < 100) {
                     normalStackSelect.style.left = '33px';
                 } else if (stackCounter > 99) {
                     normalStackSelect.style.left = '23px';
                 }
 
-                
-                // modify effect total
-                document.querySelector(`.${itemName} .item-description div span.item-total`).innerHTML = `${itemTotal}`;
+            }
 
-                // modify secondary effect total
-                if (dataItems[itemIndex].secondEffect) {
-                    document.querySelector(`.${itemName} .item-description div span.second-item-total`).innerHTML = `${secondItemTotal}`;
-                }
-                
+            this.displayItemTotals(itemIndex, effIndexes, dataItems);
+
+            if (dataItems[itemIndex].effects[1]) {
+                document.querySelector(`.${itemName} .stack-number`).style.top = '-82px';
             }
                    
+        },
+
+        getItemTotals: function(itemIndex, effIndexes, dataItems) {
+
+            const itemTotalArray = [];
+
+            effIndexes.forEach(function(element) {
+
+                let itemTotal; 
+                const itemEffectGroup = dataItems[itemIndex].effects[element];
+                
+                /* ----- Display floating numbers as percentage where needed ----- */
+                if (itemEffectGroup.percentage) {
+                    itemTotal = Math.round((itemEffectGroup.total + Number.EPSILON) * 1000) / 10 + '%';
+                } else {
+                    itemTotal = itemEffectGroup.total;                 
+                }
+
+                itemTotalArray.push(itemTotal)
+                /* ----- ------------------------------------------------ ----- */
+            })
+            return itemTotalArray;
+
+        },
+
+        displayItemTotals: function(itemIndex, effIndexes, dataItems) {
+
+            const itemTotalArray = this.getItemTotals(itemIndex, effIndexes, dataItems);
+            console.log(itemTotalArray);
+            const itemGroup = dataItems[itemIndex];
+            
+            effIndexes.forEach(function(effIndex) {
+
+                itemTotalArray.forEach(function(itemTotal) {
+
+                    if (itemTotalArray.indexOf(itemTotal) === effIndex) {
+
+                        if (itemGroup.effects[0].stackNumber === 1) {
+                            console.log('init works');
+                            document.querySelector(`.${itemGroup.itemName} .item-description`).insertAdjacentHTML('beforeend', `
+                                
+                                <div class="item-effect">
+                                    ${itemGroup.effects[effIndex].effect}: <span class=${'item-total-' + (effIndex + 1)}>${itemTotal}</span>
+                                </div>
+                                
+                            `);
+                        } else {
+                            console.log('secondary works');
+                            document.querySelector(`.${itemGroup.itemName} .item-description div span.${'item-total-' + (effIndex + 1)}`).innerHTML = `${itemTotal}`;
+                        }
+
+
+                    }
+                    
+                })
+
+            })
+
         },
 
         loadItems: function(items) {
@@ -1073,27 +1106,27 @@ var UIController = (function() {
 
 // App
 
-var appController = (function(itemCalc, UICtrl) {
+const appController = (function(itemCalc, UICtrl) {
 
-    var data = itemCalc.getData();
+    const data = itemCalc.getData();
 
-    var itemID;
+    let itemID, itemName, itemIndex, effIndexes;
 
-    var setUpEventListeners = function() {
+    const setUpEventListeners = function() {
         window.addEventListener('load', UICtrl.loadItems(data.items));
         tippy('[data-tippy-content]');
         document.querySelector('.container-left').addEventListener('click', addItem);
     }
 
-    var addItem = function() {
-        let itemName = getItemName(event);
-        let itemIndex = itemCalc.getItemIndex(itemName);
-        itemCalc.calculate(itemIndex);
-        UICtrl.updateValues(itemIndex, data.items, itemName);
+    const addItem = function() {
+        itemName = getItemName(event);
+        itemIndex = itemCalc.getItemIndex(itemName);
+        effIndexes = itemCalc.getEffectIndexes(itemIndex);
+        itemCalc.calculate(itemIndex, effIndexes);
+        UICtrl.displaySelectedItem(itemIndex, effIndexes, data.items);
     }
     
-    var getItemName = function(event) {
-        // using the img alt to call the item object is probably not very accessiblity friendly and should probably be reworked
+    const getItemName = function(event) {
         itemID = event.target.alt;
         return itemID;
     }
