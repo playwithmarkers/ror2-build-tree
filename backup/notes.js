@@ -96,5 +96,40 @@ effects: [{
     total: 0
 }]
 }
+/* 
+
+{
+    effects: [{
+                    
+    }]
+}   
+{
+    effects: [{
+                    
+    },
+    {
+        effect: '',
+        stackType: 'linear',
+        percentage: true,
+        value: 0,
+        stackValue: 0,
+        stackNumber: 0,
+        total: 0
+    }]
+} 
+
+ */
 
 // will need to restructure the calculations.  after getting the itemIndex of the target object in the items array, will need to loop over the effects array within that object and check the stackType value to process the proper calculation.  target stackType with something like: data.items[itemIndex].effects[effectIndex].stackType
+
+`<div class="item-effect">
+    ${dataItems[itemIndex].effect}: <span class="item-total">${itemTotal}</span>
+</div>`
+
+document.querySelector(`.${itemName} .item-description`).insertAdjacentHTML('beforeend', `
+                    
+    <div class="item-effect">
+        ${itemEffectGroup.effect}: <span class="item-total">${itemEffectGroup.total}</span>
+    </div>
+    
+`);
