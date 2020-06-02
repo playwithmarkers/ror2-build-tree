@@ -13,6 +13,8 @@ const itemCalculation = (function () {
     const data = {
         items: [
 
+            // Items are in alphabetical order by display name, and grouped by rarity/type
+
             /* -------------- COMMON ITEMS ------------- */
 
             {
