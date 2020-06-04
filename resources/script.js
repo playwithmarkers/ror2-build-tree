@@ -8,7 +8,7 @@
 
 */
 
-const itemCalculation = (function () {
+const itemCalculation = (function() {
 
     const data = {
         items: [
