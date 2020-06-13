@@ -4,13 +4,6 @@
 
 Items that obviously need reworking (calculations not working):
 
-
-
-- head-st v2
-- corpsebloom
-- focused convergence
-- gesture of the drowned
-- shaped glass
 - halcyon seed
 - irradiant pearl
 
@@ -26,51 +19,72 @@ const itemCalculation = (function() {
             {
                 stackType: 'linear', 
                 operation: function(itemIndex, effIndex) {
-                    console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
-                    let itemEffectGroup = data.items[itemIndex].effects[effIndex];
+                    //console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
+                    const itemEffectGroup = data.items[itemIndex].effects[effIndex];
                     itemEffectGroup.stackNumber += 1;
-                    if (itemEffectGroup.total === 0) {
-                        itemEffectGroup.total += itemEffectGroup.value;
+                    const linearCalc = function() {
+                        if (itemEffectGroup.total === 0) {
+                            itemEffectGroup.total += itemEffectGroup.value;
+                        } else {
+                            itemEffectGroup.total += itemEffectGroup.stackValue;
+                        }
+                    };
+                    if (itemEffectGroup.stackCap) {
+                        if (itemEffectGroup.stackNumber <= itemEffectGroup.stackCap) {
+                            linearCalc();
+                        }
                     } else {
-                        itemEffectGroup.total += itemEffectGroup.stackValue;
+                        linearCalc();
                     }
                     
-                    console.log(data.items);
+                    //console.log(data.items);
                 }
             },
             {
                 stackType: 'hyperbolic',
                 operation: function(itemIndex, effIndex) {
-                    console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
+                    //console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
+                    let itemGroup = data.items[itemIndex];
                     let itemEffectGroup = data.items[itemIndex].effects[effIndex];
                     itemEffectGroup.stackNumber += 1;
-                    itemEffectGroup.total = 1 - 1 / (1 + itemEffectGroup.stackValue * itemEffectGroup.stackNumber);
+                    if (itemGroup.itemName === 'focused-convergence') {
+                        if (itemEffectGroup.stackNumber <= itemEffectGroup.stackCap) {
+                            itemEffectGroup.total = 1 / (2 * itemEffectGroup.stackNumber);
+                        }
+                    } else {
+                        itemEffectGroup.total = 1 - 1 / (1 + itemEffectGroup.stackValue * itemEffectGroup.stackNumber);
+                    }
 
-                    console.log(data.items);
+                    //console.log(data.items);
                 }
             },
             {
                 stackType: 'exponential',
                 operation: function(itemIndex, effIndex) {
-                    console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
+                    //console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
                     let itemGroup = data.items[itemIndex];
                     let itemEffectGroup = itemGroup.effects[effIndex];
                     itemEffectGroup.stackNumber += 1;
-                    if (itemGroup.itemName === 'fuel-cell' || itemGroup.itemName === 'alien-head') {
-                        if (itemEffectGroup.total === 0) {
-                            itemEffectGroup.total = itemEffectGroup.value;
-                        } else {
-                            itemEffectGroup.total = 1 - (Math.pow((1 - itemEffectGroup.stackValue), itemEffectGroup.stackNumber));
-                        }
-                    } else if (itemGroup.itemName === 'h3ad-5t-v2') {
-                        if (itemEffectGroup.total === 0) {
-                            itemEffectGroup.total = itemEffectGroup.value;
-                        } else {
+                    if (itemEffectGroup.total === 0) {
+                        itemEffectGroup.total = itemEffectGroup.value;
+                    } else {
+                        if (itemGroup.itemName === 'fuel-cell' || itemGroup.itemName === 'alien-head') {
+                                itemEffectGroup.total = 1 - (Math.pow((1 - itemEffectGroup.stackValue), itemEffectGroup.stackNumber));
+                        } else if (itemGroup.itemName === 'h3ad-5t-v2' || itemGroup.itemName === 'corpsebloom') {
                             itemEffectGroup.total = itemEffectGroup.total * itemEffectGroup.stackValue;
+                        } else if (itemGroup.itemName === 'gesture-of-the-drowned') {
+                            itemEffectGroup.total = 1 - (itemEffectGroup.value * Math.pow((1 - itemEffectGroup.stackValue), (itemEffectGroup.stackNumber - 1)));
+                        } else if (itemGroup.itemName === 'shaped-glass') {
+                            if (itemEffectGroup.effect === 'Damage') {
+                                itemEffectGroup.total = Math.pow(2, itemEffectGroup.stackNumber);
+                            } else {
+                                itemEffectGroup.total = Math.pow(0.5, itemEffectGroup.stackNumber);
+                            }
                         }
+
                     }
 
-                    console.log(data.items);
+                    //console.log(data.items);
                 }
             },
             {
@@ -87,7 +101,7 @@ const itemCalculation = (function() {
                         itemEffectGroup.total += itemEffectGroup.stackValue;
                     }
 
-                    console.log(data.items);
+                    //console.log(data.items);
                 }
             },
         ]
@@ -118,14 +132,14 @@ const itemCalculation = (function() {
         getItemIndex: function(itemName) {
 
              let itemIndex;
-             console.log(itemName);
+             //console.log(itemName);
                  data.items.forEach(function(element) {
                      if (itemName === element.itemName) {
                          itemIndex = data.items.indexOf(element);
                          return itemIndex;
                      }
                  })
-             console.log('itemIndex is: ',itemIndex);
+             //console.log('itemIndex is: ',itemIndex);
              return itemIndex;
         },
 
@@ -249,7 +263,7 @@ const UIController = (function() {
                     if (itemTotalArray.indexOf(itemTotal) === effIndex) {
 
                         if (itemGroup.effects[0].stackNumber === 1) {
-                            console.log('init works');
+                            //console.log('init works');
                             document.querySelector(`.${itemGroup.itemName} .item-description`).insertAdjacentHTML('beforeend', `
                                 
                                 <div class="item-effect">
@@ -258,7 +272,7 @@ const UIController = (function() {
                                 
                             `);
                         } else {
-                            console.log('secondary works');
+                            //console.log('secondary works');
                             document.querySelector(`.${itemGroup.itemName} .item-description div span.${'item-total-' + (effIndex + 1)}`).innerHTML = `${itemTotal}`;
                         }
 

@@ -3,9 +3,7 @@ const useItemData = (function() {
 	const itemData = {
 		
 		items: [
-            // ----------------------------------------------- //
-            // ---------------- COMMON ITEMS ----------------- //
-            // ----------------------------------------------- //
+
 			{
 				itemName: "armor-piercing-rounds",
 				displayName: "Armor-Piercing Rounds",
@@ -451,12 +449,9 @@ const useItemData = (function() {
 						total: 0,
 					},
 				],
-            },
-            // ----------------------------------------------- //
-            // ---------------- UNCOMMON ITEMS --------------- //
-            // ----------------------------------------------- //
+			},
 			{
-				itemName: "atg-missile-mk-1",
+				itemName: "atg-missile-mk.-1",
 				displayName: "AtG Missile Mk. 1",
 				description:
 					"10% chance to fire a missile that deals 300% (+300% per stack) TOTAL damage.",
@@ -608,7 +603,7 @@ const useItemData = (function() {
 					},
 					{
 						effect: "Crit chance",
-						stackType: "linear",
+						stackType: "none",
 						percentage: true,
 						value: 0.05,
 						stackValue: 0,
@@ -759,7 +754,7 @@ const useItemData = (function() {
 					},
 					{
 						effect: "Crit chance",
-						stackType: "linear",
+						stackType: "none",
 						percentage: true,
 						value: 0.05,
 						stackValue: 0,
@@ -955,12 +950,9 @@ const useItemData = (function() {
 						total: 0,
 					},
 				],
-            },
-            // ----------------------------------------------- //
-            // ---------------- LEGENDARY ITEMS -------------- //
-            // ----------------------------------------------- //
+			},
 			{
-				itemName: "fifty-seven-leaf-clover",
+				itemName: "57-leaf-clover",
 				displayName: "57 Leaf Clover",
 				description:
 					"All random effects are rolled +1 (+1 per stack) times for a favorable outcome.",
@@ -1114,7 +1106,7 @@ const useItemData = (function() {
 						stackType: "exponential",
 						percentage: false,
 						value: 10,
-						stackValue: 0.5,
+						stackValue: -50,
 						stackNumber: 0,
 						total: 0,
 					},
@@ -1333,10 +1325,7 @@ const useItemData = (function() {
 						total: 0,
 					},
 				],
-            },
-            // ----------------------------------------------- //
-            // ---------------- LUNAR ITEMS ------------------ //
-            // ----------------------------------------------- //
+			},
 			{
 				itemName: "brittle-crown",
 				displayName: "Brittle Crown",
@@ -1376,7 +1365,7 @@ const useItemData = (function() {
 						stackType: "exponential",
 						percentage: true,
 						value: 0.1,
-						stackValue: 0.5,
+						stackValue: -0.5,
 						stackNumber: 0,
 						total: 0,
 					},
@@ -1396,18 +1385,16 @@ const useItemData = (function() {
 						value: 0.3,
 						stackValue: 0.3,
 						stackNumber: 0,
-                        total: 0,
-                        stackCap: 3,
+						total: 0,
 					},
 					{
 						effect: "Teleporter Zone",
 						stackType: "hyperbolic",
 						percentage: true,
 						value: 0.5,
-						stackValue: 0.5,
+						stackValue: -0.5,
 						stackNumber: 0,
-                        total: 0,
-                        stackCap: 3,
+						total: 0,
 					},
 				],
 			},
@@ -1422,8 +1409,8 @@ const useItemData = (function() {
 						effect: "Cooldown",
 						stackType: "exponential",
 						percentage: true,
-						value: 0.5,
-						stackValue: 0.15,
+						value: -0.5,
+						stackValue: -0.15,
 						stackNumber: 0,
 						total: 0,
 					},
@@ -1450,7 +1437,7 @@ const useItemData = (function() {
 						stackType: "exponential",
 						percentage: true,
 						value: 0.5,
-						stackValue: 0.5,
+						stackValue: -0.5,
 						stackNumber: 0,
 						total: 0,
 					},
@@ -1527,10 +1514,7 @@ const useItemData = (function() {
 						total: 0,
 					},
 				],
-            },
-            // ----------------------------------------------- //
-            // ---------------- BOSS ITEMS ------------------- //
-            // ----------------------------------------------- //
+			},
 			{
 				itemName: "genesis-loop",
 				displayName: "Genesis Loop",
@@ -1548,8 +1532,7 @@ const useItemData = (function() {
 						total: 0,
 					},
 				],
-            },
-            // issue with the following two items.  effects beyond the first are not displaying properly because the values are the same as the first.  problem replicated by changing values on resonance disc to be the same.  how to fix?
+			},
 			{
 				itemName: "halcyon-seed",
 				displayName: "Halcyon Seed",
@@ -1727,10 +1710,8 @@ const useItemData = (function() {
 						total: 0,
 					},
 				],
-            },
-            // ----------------------------------------------- //
-            // ---------------- EQUIPMENT ITEMS -------------- //
-            // ----------------------------------------------- //
+			},
+
 		]
 	}
 
