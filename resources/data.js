@@ -1580,11 +1580,11 @@ const useItemData = (function() {
 			{
 				itemName: "irradiant-pearl",
 				displayName: "Irradiant Pearl",
-				description: "Increases ALL effects by 10% (+10% per stack).",
+				description: "Increases ALL effects by 10% (+10% per stack). Effects are Health, Regeneration Multiplier, Move Speed, Damage, Attack Speed, Critical Chance, Armor Multiplier.",
 				rarity: "boss",
 				effects: [
 					{
-						effect: "Health",
+						effect: "Effects",
 						stackType: "linear",
 						percentage: true,
 						value: 0.1,
@@ -1592,7 +1592,7 @@ const useItemData = (function() {
 						stackNumber: 0,
 						total: 0,
 					},
-					{
+					/* {
 						effect: "Regen multiplier",
 						stackType: "linear",
 						percentage: true,
@@ -1645,7 +1645,7 @@ const useItemData = (function() {
 						stackValue: 0.1,
 						stackNumber: 0,
 						total: 0,
-					},
+					}, */
 				],
 			},
 			{

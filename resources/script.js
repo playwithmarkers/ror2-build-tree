@@ -2,10 +2,9 @@
 
 /* Section notes and ideas:
 
-Items that obviously need reworking (calculations not working):
+If I add random JS files to the backup folder with global variables, will it mess things up?  They're not linked to the HTML... so I would think not...
 
-- halcyon seed
-- irradiant pearl
+Modify individual effects for more clarity?
 
 */
 
@@ -257,30 +256,37 @@ const UIController = (function() {
             const itemGroup = dataItems[itemIndex];
             
             effIndexes.forEach(function(effIndex) {
-
-                itemTotalArray.forEach(function(itemTotal) {
-
-                    if (itemTotalArray.indexOf(itemTotal) === effIndex) {
+                let effArrayIndex = effIndexes.indexOf(effIndex);
+                console.log(effIndex, effArrayIndex);
+                
+                
+                for (let i = 0; i < itemTotalArray.length; i++) {
+                    
+                    let totalArrayIndex = i;
+                    let itemTotal = itemTotalArray[i];
+                    console.log(itemTotal, totalArrayIndex);
+                    
+                    if (totalArrayIndex === effArrayIndex) {
 
                         if (itemGroup.effects[0].stackNumber === 1) {
-                            //console.log('init works');
+                            console.log('init works');
+                            console.log(itemGroup.itemName, effArrayIndex, itemTotal, itemGroup.effects[effArrayIndex].effect);
                             document.querySelector(`.${itemGroup.itemName} .item-description`).insertAdjacentHTML('beforeend', `
                                 
                                 <div class="item-effect">
-                                    ${itemGroup.effects[effIndex].effect}: <span class=${'item-total-' + (effIndex + 1)}>${itemTotal}</span>
+                                    ${itemGroup.effects[effArrayIndex].effect}: <span class=${'item-total-' + (effArrayIndex + 1)}>${itemTotal}</span>
                                 </div>
                                 
                             `);
                         } else {
-                            //console.log('secondary works');
-                            document.querySelector(`.${itemGroup.itemName} .item-description div span.${'item-total-' + (effIndex + 1)}`).innerHTML = `${itemTotal}`;
+                            console.log('secondary works');
+                            console.log(itemGroup.itemName, effArrayIndex, itemTotal);
+                            document.querySelector(`.${itemGroup.itemName} .item-description div span.${'item-total-' + (effArrayIndex + 1)}`).innerHTML = `${itemTotal}`;
                         }
 
 
                     }
-                    
-                })
-
+                }
             })
 
         },
