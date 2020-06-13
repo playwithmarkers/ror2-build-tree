@@ -1,4 +1,4 @@
-
+/* 
 const wikiData = {
     items: [
 
@@ -1676,3 +1676,4 @@ const wikiData = {
     ]
 }
 
+ */

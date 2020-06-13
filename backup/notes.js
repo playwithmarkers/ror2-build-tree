@@ -1,6 +1,6 @@
 // the following is a method of the itemCalculation function changed on 4/10/20 @ 00:39
 
-var calculate = function(itemName) {
+/* var calculate = function(itemName) {
 
     ///////////get itemIndex section
     var itemIndex;
@@ -37,8 +37,7 @@ var calculate = function(itemName) {
         hasSecondEffect = true
         data.calculation[secondCalcIndex].operation(itemIndex, hasSecondEffect);
     }
-}
-
+} */
 
 
 
@@ -47,11 +46,11 @@ var calculate = function(itemName) {
 /* ------exponential calculation notes------ */
 
 
-var cooldown, stack, initValue;
+/* var cooldown, stack, initValue;
 initValue = .15;
-stack = 0;
+stack = 0; */
 
-function exponent() {
+/* function exponent() {
   stack += 1;
   console.log(stack);
   // **cooldown refers to the cooldown of the individual item in seconds**  i.e.:
@@ -71,13 +70,13 @@ exponent();
 exponent();
 exponent();
 exponent();
-exponent();
+exponent(); */
 
 
 
 // structure to restructure secondEffect:
 
-{
+/* {
 effects: [{
     effect: 'healing',
     stackType: 'linear',
@@ -95,7 +94,7 @@ effects: [{
     stackNumber: 0,
     total: 0
 }]
-}
+} */
 /* 
 
 {
@@ -122,7 +121,7 @@ effects: [{
 
 // will need to restructure the calculations.  after getting the itemIndex of the target object in the items array, will need to loop over the effects array within that object and check the stackType value to process the proper calculation.  target stackType with something like: data.items[itemIndex].effects[effectIndex].stackType
 
-`<div class="item-effect">
+/* `<div class="item-effect">
     ${dataItems[itemIndex].effect}: <span class="item-total">${itemTotal}</span>
 </div>`
 
@@ -132,4 +131,4 @@ document.querySelector(`.${itemName} .item-description`).insertAdjacentHTML('bef
         ${itemEffectGroup.effect}: <span class="item-total">${itemEffectGroup.total}</span>
     </div>
     
-`);
+`); */

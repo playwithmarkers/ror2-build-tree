@@ -10,7 +10,7 @@ Perhaps we should add an object property and value of {percentage: boolean} and 
 
 */
 
-var itemCalculation = (function () {
+/* var itemCalculation = (function () {
 
     var data = {
         items: [
@@ -285,7 +285,7 @@ var itemCalculation = (function () {
         }
     }
 
-})();
+})(); */
 
 // UI
 
@@ -299,13 +299,13 @@ Display each effect with its stack number and total underneath item name on sepa
 
 */  
 
-var UIController = (function() {
+/* var UIController = (function() {
 
     return {
         updateValues: function(itemIndex, dataItems, itemName) {
             //dataItems = data.items
 
-            /* var itemClass = document.querySelector(`.${itemName}`); */
+            // var itemClass = document.querySelector(`.${itemName}`); //
             var itemTotal;
             
             //checks if number is a float and converts to a percentage.  may not be the best solution to convert percentage numbers if numbers that are not percentages have decimals!! see itemController section notes.
@@ -314,7 +314,7 @@ var UIController = (function() {
                 itemTotal = Math.round((dataItems[itemIndex].total + Number.EPSILON) * 1000) / 10 + '%';
             } else {
                 itemTotal = dataItems[itemIndex].total;
-            }
+            } */
 
             /* var formatItemName;
             formatItemName = dataItems[itemIndex].itemName.replace('-', ' ');
@@ -338,7 +338,7 @@ var UIController = (function() {
             formatItemName = capital_letter(formatItemName);
             console.log(formatItemName); */
         
-            if (dataItems[itemIndex].stackNumber === 1) {
+            /* if (dataItems[itemIndex].stackNumber === 1) {
             
                 document.querySelector('.item-list').insertAdjacentHTML('beforeend', `<div class="${itemName} item-list-item"><img src="dist/img/${dataItems[itemIndex].itemName}.png" alt="${dataItems[itemIndex].itemName}" class="item-list-img"><div class="item-description"><h3>${dataItems[itemIndex].itemName}</h3><br>x${dataItems[itemIndex].stackNumber}
                 <br>${dataItems[itemIndex].effect}: ${itemTotal}</div></div>`);
@@ -355,11 +355,11 @@ var UIController = (function() {
                    
         }
     }
-})();
+})(); */
 
 // App
 
-var appController = (function(itemCalc, UICtrl) {
+/* var appController = (function(itemCalc, UICtrl) {
 
     var data = itemCalc.getData();
 
@@ -381,19 +381,15 @@ var appController = (function(itemCalc, UICtrl) {
         return itemID;
     }
 
-    /* var displayItems = function() {
-        UICtrl.updateValues(data.items);
-    } */
-
     return {
         init: () => {
             setUpEventListeners();
         }
     }
 
-})(itemCalculation, UIController);
+})(itemCalculation, UIController); */
 
-appController.init();
+//appController.init();
 
 
 

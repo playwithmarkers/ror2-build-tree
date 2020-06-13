@@ -1,4 +1,4 @@
-var data = {
+/* var data = {
     items: [
         {
             itemName: 'soldiers-syringe',
@@ -328,4 +328,4 @@ var data = {
             secondTotal: 0
         },
     ]
-};
+}; */

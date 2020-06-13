@@ -67,6 +67,18 @@ body {
   border: 2px solid #f75b46;
 }
 
+.lunar {
+  border: 2px solid #3bd3f0;
+}
+
+.boss {
+  border: 2px solid #c8d924;
+}
+
+.equipment {
+  border: 2px solid #e28c2d;
+}
+
 .item {
   display: inline-block;
 }
