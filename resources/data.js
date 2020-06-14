@@ -1730,7 +1730,487 @@ const useItemData = (function() {
             },
             // ----------------------------------------------- //
             // ---------------- EQUIPMENT ITEMS -------------- //
-            // ----------------------------------------------- //
+			// ----------------------------------------------- //
+			
+			{
+				itemName: "blast-shower",
+				displayName: "Blast Shower",
+				rarity: "equipment",
+				description:
+					"Cleanse all negative effects. Includes debuffs, damage over time, and nearby projectiles.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 20,
+					},
+				],
+			},
+			{
+				itemName: "disposable-missile-launcher",
+				displayName: "Disposable Missile Launcher",
+				rarity: "equipment",
+				description: "Fire a swarm of 12 missiles that deal 12 x 300% damage.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 45,
+					},
+				],
+			},
+			{
+				itemName: "eccentric-vase",
+				displayName: "Eccentric Vase",
+				rarity: "equipment",
+				description:
+					"Create a quantum tunnel of up to 1000m in length. Lasts 30 seconds.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 45,
+					},
+				],
+			},
+			{
+				itemName: "foreign-fruit",
+				displayName: "Foreign Fruit",
+				rarity: "equipment",
+				description: "Instantly heal for 50% of your maximum health.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 45,
+					},
+				],
+			},
+			{
+				itemName: "fuel-array",
+				displayName: "Fuel Array",
+				rarity: "equipment",
+				description:
+					"Looks like it could power something. EXTREMELY unstable...",
+			},
+			{
+				itemName: "gnarled-woodsprite",
+				displayName: "Gnarled Woodsprite",
+				rarity: "equipment",
+				description:
+					"Gain a Woodsprite follower that heals for 1.5% of your maximum health/second. Can be sent to an ally to heal them for 10% of their maximum health.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 15,
+					},
+				],
+			},
+			{
+				itemName: "jade-elephant",
+				displayName: "Jade Elephant",
+				rarity: "equipment",
+				description: "Gain 500 armor for 5 seconds.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 45,
+					},
+				],
+			},
+			{
+				itemName: "milky-chrysalis",
+				displayName: "Milky Chrysalis",
+				rarity: "equipment",
+				description:
+					"Sprout wings and fly for 15 seconds. Gain +20% movement speed for the duration.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 60,
+					},
+				],
+			},
+			{
+				itemName: "ocular-hud",
+				displayName: "Ocular HUD",
+				rarity: "equipment",
+				description: "Gain +100% Critical Strike Chance for 8 seconds.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 60,
+					},
+				],
+			},
+			{
+				itemName: "preon-accumulator",
+				displayName: "Preon Accumulator",
+				rarity: "equipment",
+				description:
+					"Fires preon tendrils, zapping enemies within 35m for up to 600% damage/second. On contact, detonate in an enormous 20m explosion for 4000% damage.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 140,
+					},
+				],
+			},
+			{
+				itemName: "primordial-cube",
+				displayName: "Primordial Cube",
+				rarity: "equipment",
+				description:
+					"Fire a black hole that draws enemies within 30m into its center. Lasts 10 seconds",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 60,
+					},
+				],
+			},
+			{
+				itemName: "radar-scanner",
+				displayName: "Radar Scanner",
+				rarity: "equipment",
+				description: "Reveal all interactables within 500m for 10 seconds.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 45,
+					},
+				],
+			},
+			{
+				itemName: "recycler",
+				displayName: "Recycler",
+				rarity: "equipment",
+				description:
+					"Transform an Item or equipment into a different one. Can only be converted into the same tier one time.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 45,
+					},
+				],
+			},
+			{
+				itemName: "royal-capacitor",
+				displayName: "Royal Capacitor",
+				rarity: "equipment",
+				description:
+					"Call down a lightning strike on a targeted monster, dealing 3000% damage and stunning nearby monsters.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 20,
+					},
+				],
+			},
+			{
+				itemName: "sawmerang",
+				displayName: "Sawmerang",
+				rarity: "equipment",
+				description:
+					"Throw three large saw blades that slice through enemies for 3x400% damage. Also deals an additional 3x100% damage per second while bleeding enemies. Can strike enemies again on the way back.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 45,
+					},
+				],
+			},
+			{
+				itemName: "the-back-up",
+				displayName: "The Back-up",
+				rarity: "equipment",
+				description: "Call 4 Strike Drones to fight for you. Lasts 25 seconds.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 100,
+					},
+				],
+			},
+			{
+				itemName: "the-crowdfunder",
+				displayName: "The Crowdfunder",
+				rarity: "equipment",
+				description:
+					"Fires a continuous barrage that deals 100% damage per bullet. Costs $1 per bullet. Cost increases over time.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 0,
+					},
+				],
+			},
+			{
+				itemName: "volcanic-egg",
+				displayName: "Volcanic Egg",
+				rarity: "equipment",
+				description:
+					"Turn into a draconic fireball for 5 seconds. Deal 500% damage on impact. Detonates at the end for 800% damage.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 30,
+					},
+				],
+			},
+			{
+				itemName: "effigy-of-grief",
+				displayName: "Effigy of Grief",
+				rarity: "lunar-equipment",
+				description:
+					"ALL characters within are slowed by 50% and have their armor reduced by 20.",
+			},
+			{
+				itemName: "glowing-meteorite",
+				displayName: "Glowing Meteorite",
+				rarity: "lunar-equipment",
+				description:
+					"Rain meteors from the sky, damaging ALL characters for 600% damage per blast. Lasts 20 seconds.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 140,
+					},
+				],
+			},
+			{
+				itemName: "helfire-tincture",
+				displayName: "Helfire Tincture",
+				rarity: "lunar-equipment",
+				description:
+					"Ignite ALL characters within 8m. Deal 5% of your maximum health/second as burning to yourself. The burn is 0.5x stronger on allies, and 24x stronger on enemies.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 45,
+					},
+				],
+			},
+			{
+				itemName: "spinel-tonic",
+				displayName: "Spinel Tonic",
+				rarity: "lunar-equipment",
+				description:
+					"Drink the Tonic, gaining a boost for 20 seconds. Increases damage by +100%. Increases attack speed by +70%. Increases armor by +20. Increases maximum health by +50%. Increases passive health regeneration by +300%. Increases movespeed by +30%.When the Tonic wears off, you have a 20% chance to gain a Tonic Affliction, reducing all of your stats by -5% (-5% per stack).",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 60,
+					},
+				],
+			},
+			{
+				itemName: "her-biting-embrace",
+				displayName: "Her Biting Embrace",
+				rarity: "elite-equipment",
+				description: "Become an aspect of ice.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 0,
+					},
+				],
+			},
+			{
+				itemName: "ifrits-distinction",
+				displayName: "Ifrit's Distinction",
+				rarity: "elite-equipment",
+				description: "Become an aspect of fire.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 0,
+					},
+				],
+			},
+			{
+				itemName: "nkuhanas-retort",
+				displayName: "N'kuhana's Retort",
+				rarity: "elite-equipment",
+				description: "Become an aspect of corruption.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 0,
+					},
+				],
+			},
+			{
+				itemName: "silence-between-two-strikes",
+				displayName: "Silence Between Two Strikes",
+				rarity: "elite-equipment",
+				description: "Become an aspect of lightning.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 0,
+					},
+				],
+			},
+			{
+				itemName: "spectral-circlet",
+				displayName: "Spectral Circlet",
+				rarity: "elite-equipment",
+				description: "Become an aspect of incorporeality.",
+				effects: [
+					{
+						effect: "",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 0,
+					},
+				],
+			},
+			
 		]
 	}
 

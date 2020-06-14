@@ -75,7 +75,7 @@ body {
   border: 2px solid #c8d924;
 }
 
-.equipment {
+.equipment, .lunar-equipment, .elite-equipment {
   border: 2px solid #e28c2d;
 }
 
