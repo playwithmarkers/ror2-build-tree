@@ -1386,7 +1386,7 @@ const useItemData = (function() {
 				itemName: "focused-convergence",
 				displayName: "Focused Convergence",
 				description:
-					"Teleporters charge 30% (+30% per stack) faster, but the size of the Teleporter zone is 50% (-50% per stack) smaller. ",
+					"Teleporters charge 30% (+30% per stack) faster, but the size of the Teleporter zone is 50% (-50% per stack) smaller. Effects do not stack above 3.",
 				rarity: "lunar",
 				effects: [
 					{
@@ -1732,6 +1732,7 @@ const useItemData = (function() {
             // ---------------- EQUIPMENT ITEMS -------------- //
 			// ----------------------------------------------- //
 			
+			// add active property to equipment objects?
 			{
 				itemName: "blast-shower",
 				displayName: "Blast Shower",
@@ -1740,7 +1741,7 @@ const useItemData = (function() {
 					"Cleanse all negative effects. Includes debuffs, damage over time, and nearby projectiles.",
 				effects: [
 					{
-						effect: "",
+						effect: "Cleanse Effects",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1758,7 +1759,7 @@ const useItemData = (function() {
 				description: "Fire a swarm of 12 missiles that deal 12 x 300% damage.",
 				effects: [
 					{
-						effect: "",
+						effect: "Fire Missles",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1777,7 +1778,7 @@ const useItemData = (function() {
 					"Create a quantum tunnel of up to 1000m in length. Lasts 30 seconds.",
 				effects: [
 					{
-						effect: "",
+						effect: "Tunnel",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1795,7 +1796,7 @@ const useItemData = (function() {
 				description: "Instantly heal for 50% of your maximum health.",
 				effects: [
 					{
-						effect: "",
+						effect: "Heal",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1812,6 +1813,18 @@ const useItemData = (function() {
 				rarity: "equipment",
 				description:
 					"Looks like it could power something. EXTREMELY unstable...",
+				effects: [
+					{
+						effect: "Self-Destruct",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 0,
+					},
+				],
 			},
 			{
 				itemName: "gnarled-woodsprite",
@@ -1821,7 +1834,7 @@ const useItemData = (function() {
 					"Gain a Woodsprite follower that heals for 1.5% of your maximum health/second. Can be sent to an ally to heal them for 10% of their maximum health.",
 				effects: [
 					{
-						effect: "",
+						effect: "Healing",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1839,7 +1852,7 @@ const useItemData = (function() {
 				description: "Gain 500 armor for 5 seconds.",
 				effects: [
 					{
-						effect: "",
+						effect: "Armor",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1858,7 +1871,7 @@ const useItemData = (function() {
 					"Sprout wings and fly for 15 seconds. Gain +20% movement speed for the duration.",
 				effects: [
 					{
-						effect: "",
+						effect: "Flight",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1876,7 +1889,7 @@ const useItemData = (function() {
 				description: "Gain +100% Critical Strike Chance for 8 seconds.",
 				effects: [
 					{
-						effect: "",
+						effect: "Critical Strike",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1895,7 +1908,7 @@ const useItemData = (function() {
 					"Fires preon tendrils, zapping enemies within 35m for up to 600% damage/second. On contact, detonate in an enormous 20m explosion for 4000% damage.",
 				effects: [
 					{
-						effect: "",
+						effect: "Damage",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1914,7 +1927,7 @@ const useItemData = (function() {
 					"Fire a black hole that draws enemies within 30m into its center. Lasts 10 seconds",
 				effects: [
 					{
-						effect: "",
+						effect: "Black Hole",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1932,7 +1945,7 @@ const useItemData = (function() {
 				description: "Reveal all interactables within 500m for 10 seconds.",
 				effects: [
 					{
-						effect: "",
+						effect: "Reveal Interactables",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1951,7 +1964,7 @@ const useItemData = (function() {
 					"Transform an Item or equipment into a different one. Can only be converted into the same tier one time.",
 				effects: [
 					{
-						effect: "",
+						effect: "Recycle",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1970,7 +1983,7 @@ const useItemData = (function() {
 					"Call down a lightning strike on a targeted monster, dealing 3000% damage and stunning nearby monsters.",
 				effects: [
 					{
-						effect: "",
+						effect: "Damage",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -1989,7 +2002,7 @@ const useItemData = (function() {
 					"Throw three large saw blades that slice through enemies for 3x400% damage. Also deals an additional 3x100% damage per second while bleeding enemies. Can strike enemies again on the way back.",
 				effects: [
 					{
-						effect: "",
+						effect: "Damage",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2007,7 +2020,7 @@ const useItemData = (function() {
 				description: "Call 4 Strike Drones to fight for you. Lasts 25 seconds.",
 				effects: [
 					{
-						effect: "",
+						effect: "Drones",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2026,7 +2039,7 @@ const useItemData = (function() {
 					"Fires a continuous barrage that deals 100% damage per bullet. Costs $1 per bullet. Cost increases over time.",
 				effects: [
 					{
-						effect: "",
+						effect: "Damage",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2045,7 +2058,7 @@ const useItemData = (function() {
 					"Turn into a draconic fireball for 5 seconds. Deal 500% damage on impact. Detonates at the end for 800% damage.",
 				effects: [
 					{
-						effect: "",
+						effect: "Damage",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2059,19 +2072,33 @@ const useItemData = (function() {
 			{
 				itemName: "effigy-of-grief",
 				displayName: "Effigy of Grief",
-				rarity: "lunar-equipment",
+				// lunar equipment
+				rarity: "equipment",
 				description:
 					"ALL characters within are slowed by 50% and have their armor reduced by 20.",
+				effects: [
+					{
+						effect: "Decrease Effects",
+						stackType: "equipment",
+						percentage: false,
+						value: 0,
+						stackValue: 0,
+						stackNumber: 0,
+						total: 0,
+						cooldown: 0,
+					},
+				],
 			},
 			{
 				itemName: "glowing-meteorite",
 				displayName: "Glowing Meteorite",
-				rarity: "lunar-equipment",
+				// lunar equipment
+				rarity: "equipment",
 				description:
 					"Rain meteors from the sky, damaging ALL characters for 600% damage per blast. Lasts 20 seconds.",
 				effects: [
 					{
-						effect: "",
+						effect: "Damage",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2085,12 +2112,13 @@ const useItemData = (function() {
 			{
 				itemName: "helfire-tincture",
 				displayName: "Helfire Tincture",
-				rarity: "lunar-equipment",
+				// lunar equipment
+				rarity: "equipment",
 				description:
 					"Ignite ALL characters within 8m. Deal 5% of your maximum health/second as burning to yourself. The burn is 0.5x stronger on allies, and 24x stronger on enemies.",
 				effects: [
 					{
-						effect: "",
+						effect: "Damage",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2104,12 +2132,13 @@ const useItemData = (function() {
 			{
 				itemName: "spinel-tonic",
 				displayName: "Spinel Tonic",
-				rarity: "lunar-equipment",
+				// lunar equipment
+				rarity: "equipment",
 				description:
 					"Drink the Tonic, gaining a boost for 20 seconds. Increases damage by +100%. Increases attack speed by +70%. Increases armor by +20. Increases maximum health by +50%. Increases passive health regeneration by +300%. Increases movespeed by +30%.When the Tonic wears off, you have a 20% chance to gain a Tonic Affliction, reducing all of your stats by -5% (-5% per stack).",
 				effects: [
 					{
-						effect: "",
+						effect: "Increase Effects",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2123,11 +2152,12 @@ const useItemData = (function() {
 			{
 				itemName: "her-biting-embrace",
 				displayName: "Her Biting Embrace",
-				rarity: "elite-equipment",
+				// elite equipment
+				rarity: "equipment",
 				description: "Become an aspect of ice.",
 				effects: [
 					{
-						effect: "",
+						effect: "Ice Aspect",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2141,11 +2171,12 @@ const useItemData = (function() {
 			{
 				itemName: "ifrits-distinction",
 				displayName: "Ifrit's Distinction",
-				rarity: "elite-equipment",
+				// elite equipment
+				rarity: "equipment",
 				description: "Become an aspect of fire.",
 				effects: [
 					{
-						effect: "",
+						effect: "Fire Aspect",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2159,11 +2190,12 @@ const useItemData = (function() {
 			{
 				itemName: "nkuhanas-retort",
 				displayName: "N'kuhana's Retort",
-				rarity: "elite-equipment",
+				// elite equipment
+				rarity: "equipment",
 				description: "Become an aspect of corruption.",
 				effects: [
 					{
-						effect: "",
+						effect: "Corruption Aspect",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2177,11 +2209,12 @@ const useItemData = (function() {
 			{
 				itemName: "silence-between-two-strikes",
 				displayName: "Silence Between Two Strikes",
-				rarity: "elite-equipment",
+				// elite equipment
+				rarity: "equipment",
 				description: "Become an aspect of lightning.",
 				effects: [
 					{
-						effect: "",
+						effect: "Lightning Aspect",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,
@@ -2195,11 +2228,12 @@ const useItemData = (function() {
 			{
 				itemName: "spectral-circlet",
 				displayName: "Spectral Circlet",
-				rarity: "elite-equipment",
+				// elite equipment
+				rarity: "equipment",
 				description: "Become an aspect of incorporeality.",
 				effects: [
 					{
-						effect: "",
+						effect: "Incorporeality Aspect",
 						stackType: "equipment",
 						percentage: false,
 						value: 0,

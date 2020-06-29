@@ -43,8 +43,8 @@ const itemCalculation = (function() {
                 stackType: 'hyperbolic',
                 operation: function(itemIndex, effIndex) {
                     //console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
-                    let itemGroup = data.items[itemIndex];
-                    let itemEffectGroup = data.items[itemIndex].effects[effIndex];
+                    const itemGroup = data.items[itemIndex];
+                    const itemEffectGroup = itemGroup.effects[effIndex];
                     itemEffectGroup.stackNumber += 1;
                     if (itemGroup.itemName === 'focused-convergence') {
                         if (itemEffectGroup.stackNumber <= itemEffectGroup.stackCap) {
@@ -61,8 +61,8 @@ const itemCalculation = (function() {
                 stackType: 'exponential',
                 operation: function(itemIndex, effIndex) {
                     //console.log(`itemIndex is ${itemIndex}, effIndex is ${effIndex}`);
-                    let itemGroup = data.items[itemIndex];
-                    let itemEffectGroup = itemGroup.effects[effIndex];
+                    const itemGroup = data.items[itemIndex];
+                    const itemEffectGroup = itemGroup.effects[effIndex];
                     itemEffectGroup.stackNumber += 1;
                     if (itemEffectGroup.total === 0) {
                         itemEffectGroup.total = itemEffectGroup.value;
@@ -89,20 +89,46 @@ const itemCalculation = (function() {
             {
                 stackType: 'special',
                 operation: function(itemIndex, effIndex) {
-                    let itemGroup = data.items[itemIndex];
-                    let itemEffectGroup = itemGroup.effects[effIndex];
+                    const itemGroup = data.items[itemIndex];
+                    const itemEffectGroup = itemGroup.effects[effIndex];
+                    itemEffectGroup.stackNumber += 1;
                     if (itemGroup.itemName === 'bandolier') {
-                        itemEffectGroup.stackNumber += 1;
                         itemEffectGroup.total = 1 - 1 / Math.pow((1 + itemEffectGroup.stackNumber), 0.33);
                     } else if (itemGroup.itemName === 'rusted-key') {
                         // do we want to get into item chance?
-                        itemEffectGroup.stackNumber += 1;
                         itemEffectGroup.total += itemEffectGroup.stackValue;
                     }
 
                     //console.log(data.items);
                 }
             },
+            {
+                stackType: 'equipment',
+                operation: function(itemIndex, effIndex) {
+                    // *******run a console.log on the data.items to see if stackNumber is working correctly for the equipment*****
+                    
+                    const itemGroup = data.items[itemIndex];
+                    const itemEffectGroup = itemGroup.effects[effIndex];
+                    //const itemName = itemGroup.itemName;
+                    
+                    if (itemEffectGroup.stackNumber === 0) {
+                        // loop over equipment objects and check if any other stackNumber > 0
+                        for (let i = 0; i < data.items.length; i++) {
+                            if (data.items[i].rarity === 'equipment') {
+                                // notice - hard coded to effects[0]
+                                if (data.items[i].effects[0].stackNumber > 0) {
+                                    // if so, change that stackNumber to 0
+                                    data.items[i].effects[0].stackNumber = 0;
+                                }
+                            }
+                        }
+                        // change the new equipment stack to 1
+                        itemEffectGroup.stackNumber = 1; 
+                    }
+                    // only equipment with stackNumber > 0 will be displayed in the UICtrl
+                    
+                }
+            }
         ]
     };
 
@@ -223,6 +249,37 @@ const UIController = (function() {
             }
                    
         },
+        // this is not working....................
+        displayEquipment: function(itemIndex, effIndexes, dataItems) {
+            let itemName, stackCounter;
+            
+            itemName = dataItems[itemIndex].itemName;
+
+            stackCounter = dataItems[itemIndex].effects[0].stackNumber;
+            
+            if (stackCounter === 1) {
+            
+                // display initial image, title and stack count
+                document.querySelector('.item-list').insertAdjacentHTML('afterbegin', `
+                
+                <div class="${itemName} item-list-item">
+                    <div class="item">
+                        <img src="dist/img/nobg-img/${dataItems[itemIndex].itemName}.png" alt="${dataItems[itemIndex].itemName}" class="item-list-img item-img ${dataItems[itemIndex].rarity}" data-tippy-content="${dataItems[itemIndex].description}">
+                    </div>
+                    <div class="item-description">
+                        <h3>${dataItems[itemIndex].displayName}</h3>
+                    </div>
+                    <div class="stack-number">x${dataItems[itemIndex].effects[0].stackNumber}</div>
+                </div>
+                
+                `);
+
+                // run tooltips package on new content
+                tippy('[data-tippy-content]');
+                this.displayItemTotals(itemIndex, effIndexes, dataItems);
+            } 
+        },
+        // ........................
 
         getItemTotals: function(itemIndex, effIndexes, dataItems) {
 
@@ -271,14 +328,28 @@ const UIController = (function() {
                         if (itemGroup.effects[0].stackNumber === 1) {
                             console.log('init works');
                             console.log(itemGroup.itemName, effArrayIndex, itemTotal, itemGroup.effects[effArrayIndex].effect);
-                            document.querySelector(`.${itemGroup.itemName} .item-description`).insertAdjacentHTML('beforeend', `
-                                
-                                <div class="item-effect">
-                                    ${itemGroup.effects[effArrayIndex].effect}: <span class=${'item-total-' + (effArrayIndex + 1)}>${itemTotal}</span>
-                                </div>
-                                
-                            `);
-                        } else {
+                            // this is not working...
+
+                            // **********removing an equipment item should be just as simple as calling a querySelector on 'cooldown' and removing its parent div if the target doesn't equal the existing element (based on itemName)**********
+                            
+                            if (itemGroup.rarity === 'equipment') {
+                                document.querySelector(`.${itemGroup.itemName} .item-description`).insertAdjacentHTML('beforeend', `
+                                    
+                                    <div class="cooldown">
+                                        Cooldown: ${itemGroup.effects[effArrayIndex].cooldown}
+                                    </div>
+                                    
+                                `);
+                            } else {
+                                document.querySelector(`.${itemGroup.itemName} .item-description`).insertAdjacentHTML('beforeend', `
+                                    
+                                    <div class="item-effect">
+                                        ${itemGroup.effects[effArrayIndex].effect}: <span class=${'item-total-' + (effArrayIndex + 1)}>${itemTotal}</span>
+                                    </div>
+                                    
+                                `);
+                            }
+                        } else if (itemGroup.effects[0].stackNumber > 1) {
                             console.log('secondary works');
                             console.log(itemGroup.itemName, effArrayIndex, itemTotal);
                             document.querySelector(`.${itemGroup.itemName} .item-description div span.${'item-total-' + (effArrayIndex + 1)}`).innerHTML = `${itemTotal}`;
